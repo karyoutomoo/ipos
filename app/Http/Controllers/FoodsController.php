@@ -38,4 +38,9 @@ class FoodsController extends Controller
     $food->delete();
     return response()->json(null, 204);
   }
+
+  public function boot(){
+    $fx = Food::all();
+    return view('food.index', ['fx'=>$fx]);
+  }
 }
