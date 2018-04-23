@@ -16,12 +16,16 @@ Route::get('/', function () {
 });
 
 // Route::resource('makanan', 'FoodsController');
-Route::get('/viewfood', 'FoodsController@boot');
+Route::get('/viewfood', 'FoodsController@boot')->name('viewfood');
 
-Route::get('/order', 'OrdersController@index');
+Route::get('/order', 'OrdersController@index')->name('order');
 
-Route::get('/store', 'StoresController@index');
+Route::get('/store', 'StoresController@index')->name('store');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin/settings', 'AdminController@index');
+
+Route::get('/admin/password', 'AdminController@password');
