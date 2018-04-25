@@ -29,3 +29,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/settings', 'AdminController@index');
 
 Route::get('/admin/password', 'AdminController@password');
+
+Route::get('/status', function(){ return view('status.index'); })->name('status');

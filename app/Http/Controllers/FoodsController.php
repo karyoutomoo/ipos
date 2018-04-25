@@ -8,6 +8,12 @@ use App\Food;
 class FoodsController extends Controller
 {
     //
+
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   public function index(){
     return Food::all();
   }

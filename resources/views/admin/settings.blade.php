@@ -20,8 +20,8 @@
       <tbody>
         <tr>
           <td>Brian</td>
-          <td>b{{'@'}}b.b</td>
-          <td>Administrator</td>
+          <td>brian{{'@'}}gmail.com</td>
+          <td>Customer</td>
         </tr>
       </tbody>
     </table>

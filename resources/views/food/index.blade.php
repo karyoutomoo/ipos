@@ -44,7 +44,9 @@
   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="image/soto.jpg" alt="Soto Ayam Bu Kana">
+        <a href="{{route('order')}}">
+          <img src="image/soto.jpg" alt="Soto Ayam Bu Kana">
+        </a>
         <div class="caption">
           <h3>Soto Ayam Lamongan</h3>
           <p>Telah berdiri sejak 1983, Soto ayam bu Kana telah setia melayani civitas akademika dan terjamin kualitas rasanya</p>
@@ -53,10 +55,34 @@
     </div>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="image/tehpoci.jpg" alt="Teh Poci Bu Wahyu">
+        <a href="{{route('order')}}">
+          <img src="image/tehpoci.jpg" alt="Teh Poci Bu Wahyu">
+        </a>
         <div class="caption">
           <h3>Teh Poci</h3>
           <p>Teh Poci Bu Wahyu: Sehat, Menyegarkan!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <a href="{{route('order')}}">
+          <img src="image/waffle.jpg" alt="Dream Waffle Mbak Sri">
+        </a>
+        <div class="caption">
+          <h3>Dream Waffle</h3>
+          <p>Waffle murah enak mengenyangkan. Terdapat banyak rasa: Cokelat, Keju, Susu, Vanilla, Blueberry.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <a href="{{route('order')}}">
+          <img src="image/sushi.jpg" alt="Hayaku Sushi">
+        </a>
+        <div class="caption">
+          <h3>Hayaku Sushi</h3>
+          <p>Irrashaimase! Hayaku Sushi wa daisuki! Hayaku Sushi wa oishiiii desuyo! murah meriah enak</p>
         </div>
       </div>
     </div>

@@ -26,6 +26,16 @@
         <td>Teh Poci Bu Wahyu</td>
         <td>Timur</td>
       </tr>
+      <tr>
+        <td>3</td>
+        <td>Dream Waffle Mbak Sri</td>
+        <td>Tengah</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Hayaku Sushi</td>
+        <td>Tengah</td>
+      </tr>
     </tbody>
   </table>
 @endsection
