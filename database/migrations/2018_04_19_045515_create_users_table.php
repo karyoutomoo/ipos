@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role');
-            $table->string('store_id'); /* If the user works in a store */
+            $table->unsignedInteger('store_id'); /* If the user works in a store */
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('store_id')->references('id')->on('stores');
