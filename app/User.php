@@ -26,4 +26,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the store where the user works.
+     * Not all users work in a store.
+     */
+    public function store()
+    {
+        return $this->belongsTo('App\Store');
+    }
+
+    /**
+     * Get orders from the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

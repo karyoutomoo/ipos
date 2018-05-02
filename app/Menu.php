@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Menu extends Model
 {
     /**
-     * Get the user that makes the order.
+     * Get the store that owns the menu.
      */
-    public function user()
+    public function store()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Store');
     }
 
     /**
-     * Get order items from the order.
+     * Get order items that have the menu ordered.
      */
     public function orderItems()
     {
