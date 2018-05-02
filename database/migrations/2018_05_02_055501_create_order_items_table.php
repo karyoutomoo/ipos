@@ -19,6 +19,7 @@ class CreateOrderItemsTable extends Migration
             $table->unsignedInteger('menu_id');
             $table->unsignedInteger('qty');
             $table->decimal('price', 8, 2);
+            $table->string('status');
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('menu_id')->references('id')->on('menus');
