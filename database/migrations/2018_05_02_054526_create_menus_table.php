@@ -17,6 +17,7 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('store_id');
             $table->string('name');
+            $table->string('type');
             $table->decimal('price', 8, 2);
             $table->string('status');
             $table->timestamps();

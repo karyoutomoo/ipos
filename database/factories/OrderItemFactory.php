@@ -7,7 +7,6 @@ $factory->define(App\OrderItem::class, function (Faker $faker) {
         'order_id' => $faker->randomElement(App\Order::all()->pluck('id')->toArray()),
         'menu_id' => $faker->randomElement(App\Menu::all()->pluck('id')->toArray()),
         'qty' => $faker->numberBetween($min = 1, $max = 5),
-        'price' => 10000,
-        'status' => $faker->boolean
+        'status' => 'completed'
     ];
 });

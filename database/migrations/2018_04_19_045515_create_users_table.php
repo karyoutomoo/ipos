@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role');
+            $table->string('role')->default('customer');
             $table->unsignedInteger('store_id')->nullable(); /* If the user works in a store */
             $table->rememberToken();
             $table->timestamps();
