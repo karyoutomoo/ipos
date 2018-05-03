@@ -18,7 +18,12 @@ Route::get('/', function () {
 // Route::resource('makanan', 'FoodsController');
 Route::get('/viewfood', 'FoodsController@boot')->name('viewfood');
 
+// Order page
 Route::get('/order', 'OrdersController@index')->name('order');
+Route::post('/order', 'OrdersController@store');
+
+// Order status
+Route::get('/status', 'OrdersController@status')->name('status');
 
 Route::get('/store', 'StoresController@index')->name('store');
 
@@ -29,5 +34,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/settings', 'AdminController@index');
 
 Route::get('/admin/password', 'AdminController@password');
-
-Route::get('/status', function(){ return view('status.index'); })->name('status');

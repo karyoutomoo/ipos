@@ -18,30 +18,21 @@
         <tr>
           <th>Nomor Pemesanan</th>
           <th>Item</th>
+          <th>Qty</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Soto Ayam Lamongan Bu Kana</td>
-          <td>PAID</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Hayaku Sushi</td>
-          <td>PAID</td>
-        </tr>
-        <tr>
-          <td>44</td>
-          <td>Teh Poci</td>
-          <td>REJECTED (HABIS)</td>
-        </tr>
-        <tr>
-          <td>44</td>
-          <td>Dream Waffle</td>
-          <td>ACCEPTED</td>
-        </tr>
+        @foreach ($orders as $order)
+          @foreach ($order->orderItems as $item)
+            <tr>
+              <td>{{ $item->order_id }}</td>
+              <td>{{ $item->menu->name }}</td>
+              <td>{{ $item->qty }}</td>
+              <td>{{ $item->status }}</td>
+            </tr>
+          @endforeach
+        @endforeach
       </tbody>
     </table>
   </div>
