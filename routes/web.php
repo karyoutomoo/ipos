@@ -28,12 +28,6 @@ Route::group(['prefix' => 'makanan'], function(){
 
 Route::get('/pemesanan', 'OrdersController@index')->name('order');
 
-// Route::get('/toko', 'StoresController@index')->name('store');
-// Route::get('/buattoko', function(){return view('store.create');});
-// Route::post('/buattoko', 'StoresController@create');
-// Route::get('/daftartoko', 'StoresController@register');  
-// Route::post('/daftartoko', 'StoresController@pick');
-
 Route::prefix('toko')->group(function(){
   Route::get('/', 'StoresController@index');
   Route::get('buat', 'StoresController@create_index');
@@ -41,6 +35,13 @@ Route::prefix('toko')->group(function(){
   Route::get('daftar', 'StoresController@register_index');
   Route::post('daftar', 'StoresController@register');
 });
+
+// Order page
+Route::get('/order', 'OrdersController@index')->name('order');
+Route::post('/order', 'OrdersController@store');
+
+// Order status
+Route::get('/status', 'OrdersController@status')->name('status');
 
 Route::group(['middleware' => 'cekpenjual'], function(){
 });

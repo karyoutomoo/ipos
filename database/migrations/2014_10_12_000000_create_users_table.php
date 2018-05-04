@@ -19,10 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('name');
             $table->integer('role')->default(1);
-            $table->integer('toko_id')->default(0);
+            $table->integer('toko_id')->nullable();
             $table->boolean('verified')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('toko_id')->references('id')->on('stores');
         });
     }
 
