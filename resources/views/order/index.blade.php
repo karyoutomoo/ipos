@@ -1,18 +1,24 @@
 @extends('adminlte::page')
 
-@section('title', 'IPOS - Order')
+@section('title', 'IPOS - Pemesanan')
 
 @section('content_header')
   <h1>Pemesanan</h1>
 @endsection
 
 @section('content')
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      
+    </div>
+  </div>
+{{--
 <form role="form">
   <h4>Makanan</h4>
   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <a href="{{route('viewfood')}}">
+        <a href="{{url('makanan')}}">
           <img src="image/soto.jpg" alt="Soto Ayam Bu Kana">
         </a>
         <div class="caption">
@@ -22,11 +28,11 @@
             <label class="sr-only" for="sotoAmount"></label>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('sotoAmount',false)"><b>-</b></button>
               </span>
               <input type="number" min="0" class="form-control" id="sotoAmount" placeholder="Soto">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('sotoAmount',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -35,7 +41,7 @@
     </div>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <a href="{{route('viewfood')}}">
+        <a href="{{url('makanan')}}">
           <img src="image/waffle.jpg" alt="Dream Waffle Mbak Sri">
         </a>
         <div class="caption">
@@ -45,11 +51,11 @@
             <label class="sr-only" for="waffleAmount"></label>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('waffleAmount',false)"><b>-</b></button>
               </span>
               <input type="number" min="0" class="form-control" id="waffleAmount" placeholder="Waffle">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('waffleAmount',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -58,7 +64,7 @@
     </div>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <a href="{{route('viewfood')}}">
+        <a href="{{url('makanan')}}">
           <img src="image/sushi.jpg" alt="Hayaku Sushi">
         </a>
         <div class="caption">
@@ -68,11 +74,11 @@
             <label class="sr-only" for="sushiAmount"></label>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('sushiAmount',false)"><b>-</b></button>
               </span>
               <input type="number" min="0" class="form-control" id="sushiAmount" placeholder="Waffle">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('sushiAmount',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -85,7 +91,7 @@
   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <a href="{{route('viewfood')}}">
+        <a href="{{url('makanan')}}">
           <img src="image/tehpoci.jpg" alt="Teh Poci Bu Wahyu">
         </a>
         <div class="caption">
@@ -95,11 +101,11 @@
             <label class="sr-only" for="tehPociAmount"></label>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('tehPociAmount',false)"><b>-</b></button>
               </span>
               <input type="number" min="0" class="form-control" id="tehPociAmount" placeholder="Teh Poci">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('tehPociAmount',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -111,11 +117,11 @@
   <div class="footer">
     <div class="container">
       <p>
-{{--         <h3 class="left">
+        <h3 class="left">
           Total Harga:
           <span id="totalAmount">0</span> 
         </h3>
- --}}        <div class="form-group">
+        <div class="form-group">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Pesan</button>
         </div>
       </p>
@@ -172,6 +178,8 @@
   </div>
 
 </form>
+--}}
+
 @endsection
 
 @section('css')
@@ -185,4 +193,19 @@
       color:#FFFFFF;
     }
   </style>
+@endsection
+
+@section('js')
+  <script type="text/javascript">
+    function  change(id, plus){
+      var e = document.getElementById(id);
+      if (plus){
+        e.value = +e.value + 1;
+      } else if (e.value > 0) {
+        e.value = +e.value - 1;
+      } else {
+        e.value = +0;
+      }
+    }
+  </script>
 @endsection

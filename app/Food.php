@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     //
-  protected $fillable = ['name', 'outlet', 'description', 'price', 'availability'];
+  protected $fillable = ['name', 'store_id', 'description', 'price', 'imagepath', ];
 }

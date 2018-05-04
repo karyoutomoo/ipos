@@ -10,24 +10,48 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () { return view('welcome'); });
+
+
+// Route::resource('/makanan', 'FoodsController');
+// Route::get('/lihatmakanan', 'FoodsController@index')->name('viewfood');
+// Route::get('/tambahmakanan', 'FoodsController@tambah');
+// Route::post('/tambahmakanan', 'FoodsController@create')->name('submitmakanan');
+
+Route::group(['prefix' => 'makanan'], function(){
+  Route::get('/', 'FoodsController@index');
+  Route::get('buat', 'FoodsController@create_index');
+  Route::post('buat', 'FoodsController@create');
 });
 
-// Route::resource('makanan', 'FoodsController');
-Route::get('/viewfood', 'FoodsController@boot')->name('viewfood');
+Route::get('/pemesanan', 'OrdersController@index')->name('order');
 
-Route::get('/order', 'OrdersController@index')->name('order');
+// Route::get('/toko', 'StoresController@index')->name('store');
+// Route::get('/buattoko', function(){return view('store.create');});
+// Route::post('/buattoko', 'StoresController@create');
+// Route::get('/daftartoko', 'StoresController@register');  
+// Route::post('/daftartoko', 'StoresController@pick');
 
-Route::get('/store', 'StoresController@index')->name('store');
+Route::prefix('toko')->group(function(){
+  Route::get('/', 'StoresController@index');
+  Route::get('buat', 'StoresController@create_index');
+  Route::post('buat', 'StoresController@create');
+  Route::get('daftar', 'StoresController@register_index');
+  Route::post('daftar', 'StoresController@register');
+});
 
-Auth::routes();
+Route::group(['middleware' => 'cekpenjual'], function(){
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin/settings', 'AdminController@index');
+Route::prefix('profile')->group(function(){
+  Route::get('/', 'ProfileController@index');
+  Route::get('/password', 'ProfileController@password');
+});
 
-Route::get('/admin/password', 'AdminController@password');
-
-Route::get('/status', function(){ return view('status.index'); })->name('status');
+Route::resource('/status', 'StatusController');
+Route::get('/status', 'StatusController@index')->name('status');

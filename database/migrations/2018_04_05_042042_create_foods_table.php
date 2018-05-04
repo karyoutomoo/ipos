@@ -15,12 +15,12 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name');
-            $table->string('outlet');
-            $table->text('description');
+            $table->string('store_id');
             $table->integer('price');
-            $table->boolean('availability');
+            $table->text('description');
+            $table->string('imagepath');
+            $table->timestamps();
         });
     }
 

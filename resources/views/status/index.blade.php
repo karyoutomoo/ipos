@@ -25,22 +25,22 @@
         <tr>
           <td>1</td>
           <td>Soto Ayam Lamongan Bu Kana</td>
-          <td>PAID</td>
+          <td>LUNAS</td>
         </tr>
         <tr>
           <td>2</td>
           <td>Hayaku Sushi</td>
-          <td>PAID</td>
+          <td>LUNAS</td>
         </tr>
         <tr>
           <td>44</td>
           <td>Teh Poci</td>
-          <td>REJECTED (HABIS)</td>
+          <td>DITOLAK (HABIS)</td>
         </tr>
         <tr>
           <td>44</td>
           <td>Dream Waffle</td>
-          <td>ACCEPTED</td>
+          <td>DITERIMA</td>
         </tr>
       </tbody>
     </table>

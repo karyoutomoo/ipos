@@ -15,10 +15,11 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('store_name');
             $table->string('location');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
+            $table->boolean('verified')->default(0);
+            $table->timestamps();
         });
     }
 

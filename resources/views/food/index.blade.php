@@ -8,8 +8,8 @@
 
 @section('content')
   {{-- 
-  @if ($fx->count())
-    @foreach ($fx as $f)
+  @if ($makanan->count())
+    @foreach ($makanan as $f)
       {{ $f->id }}
       {{ $f->name }}
       {{ $f->outlet }}
@@ -23,70 +23,49 @@
       Data Makanan Tidak Ditemukan
     </div>
   @endif
-
-  <div class="card">
-    <img class="card-img-top" src="image/soto.jpg" alt="Soto Ayam Lamongan">
-    <div class="card-body">
-      <h5 class="card-title">Soto Ayam Lamongan Bu Kana</h5>
-      <p class="card-text">Telah berdiri sejak 1983, selalu setia melayani civitas ITS</p>
-    </div>
-  </div>
-  
-  <div class="card">
-    <img class="card-img-top" src="image/tehpoci.jpg" alt="Teh Poci">
-    <div class="card-body">
-      <h5 class="card-title">Teh Poci</h5>
-      <p class="card-text">Rasakan kesegarannya!</p>
-    </div>
-  </div>
   --}}
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <a href="{{route('order')}}">
-          <img src="image/soto.jpg" alt="Soto Ayam Bu Kana">
-        </a>
-        <div class="caption">
-          <h3>Soto Ayam Lamongan</h3>
-          <p>Telah berdiri sejak 1983, Soto ayam bu Kana telah setia melayani civitas akademika dan terjamin kualitas rasanya</p>
+  
+  <a href="/makanan/buat" class="btn btn-primary">Buat Makanan</a>
+  @if ($makanans->count())
+      <div class="row">
+    @foreach ($makanans as $makanan)
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <a href="{{asset('storage/makanan/'.$makanan->imagepath)}}">
+              <img src="{{asset('storage/makanan/'.$makanan->imagepath)}}" alt="{{$makanan->name}}">
+            </a>
+            <div class="caption">
+              <h3>{{$makanan->name}}</h3>
+              <p>{{$makanan->description}}</p>
+              <p>Harga: {{$makanan->price}}</p>
+            </div>
+          </div>
         </div>
+      {{-- 
+        {{$makanan->id}}
+        {{$makanan->store_id}}
+       --}}
+        @if ($loop->iteration % 3 == 0)
+          </div>
+          <div class="row">
+        @endif
+    @endforeach
       </div>
+  @else
+    <div>
+      Belum ada Makanan
     </div>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <a href="{{route('order')}}">
-          <img src="image/tehpoci.jpg" alt="Teh Poci Bu Wahyu">
-        </a>
-        <div class="caption">
-          <h3>Teh Poci</h3>
-          <p>Teh Poci Bu Wahyu: Sehat, Menyegarkan!</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <a href="{{route('order')}}">
-          <img src="image/waffle.jpg" alt="Dream Waffle Mbak Sri">
-        </a>
-        <div class="caption">
-          <h3>Dream Waffle</h3>
-          <p>Waffle murah enak mengenyangkan. Terdapat banyak rasa: Cokelat, Keju, Susu, Vanilla, Blueberry.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <a href="{{route('order')}}">
-          <img src="image/sushi.jpg" alt="Hayaku Sushi">
-        </a>
-        <div class="caption">
-          <h3>Hayaku Sushi</h3>
-          <p>Irrashaimase! Hayaku Sushi wa daisuki! Hayaku Sushi wa oishiiii desuyo! murah meriah enak</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  @endif
+{{--   
+  Soto Ayam Lamongan Bu Kana
+    Telah berdiri sejak 1983, Soto ayam bu Kana telah setia melayani civitas akademika dan terjamin kualitas rasanya
+  Teh Poci Bu Wahyu
+    Teh Poci Bu Wahyu: Sehat, Menyegarkan!
+  Dream Waffle (Mbak Sri)
+    Waffle murah enak mengenyangkan. Terdapat banyak rasa: Cokelat, Keju, Susu, Vanilla, Blueberry.
+  Hayaku Sushi
+    Irrashaimase! Hayaku Sushi wa daisuki! Hayaku Sushi wa oishiiii desuyo! murah meriah enak
+--}}
 
 
 @endsection

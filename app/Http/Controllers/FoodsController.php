@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Food;
+use Auth;
 
 class FoodsController extends Controller
 {
@@ -15,9 +16,32 @@ class FoodsController extends Controller
   }
 
   public function index(){
-    return Food::all();
+    $data['makanans'] = Food::get();
+    return view('food.index', $data);
   }
 
+  public function create_index(){
+    return view('food.create');
+  }
+
+  public function create(Request $request){
+    $user = Auth::user();
+    $food = new Food();
+    $food->name = $request['nama_makanan'];
+    $food->store_id = $user['toko_id'];
+    $food->price = $request['harga'];
+    $food->description = $request['deskripsi'];
+    
+    $image = $request->file('gambar_makanan');
+    $image_name = time().'.'.$image->getClientOriginalExtension();
+    $image->storeAs('public/makanan', $image_name);
+    
+    $food->imagepath= $image_name;
+    $food->save();
+    return redirect('makanan'); 
+  }
+
+  // API Controllers:
   public function show(Food $food){
     return $food;
   }
@@ -28,7 +52,6 @@ class FoodsController extends Controller
       'outlet' => 'required',
       'description' => 'required',
       'price' => 'integer',
-      'availability' => 'boolean',
     ]);
 
     $food = Food::create($request->all());
@@ -45,8 +68,5 @@ class FoodsController extends Controller
     return response()->json(null, 204);
   }
 
-  public function boot(){
-    $fx = Food::all();
-    return view('food.index', ['fx'=>$fx]);
-  }
+
 }

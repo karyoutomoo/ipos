@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
-class AdminController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +15,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.settings');
+        $id_user = Auth::user()->id;
+        $data['user'] = User::find($id_user); 
+        return view('profile.index', $data);
     }
 
     public function password()
     {
-        return view('admin.password');
+        return view('profile.password');
     }
 
     /**
