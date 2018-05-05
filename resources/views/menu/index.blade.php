@@ -31,13 +31,31 @@
     @foreach ($makanans as $makanan)
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
-            <a href="{{asset('storage/makanan/'.$makanan->imagepath)}}">
-              <img src="{{asset('storage/makanan/'.$makanan->imagepath)}}" alt="{{$makanan->name}}">
+            <a href="{{asset($makanan->menu_imagepath)}}">
+              <img src="{{asset($makanan->menu_imagepath)}}" alt="{{$makanan->menu_name}}">
             </a>
             <div class="caption">
-              <h3>{{$makanan->name}}</h3>
-              <p>{{$makanan->description}}</p>
-              <p>Harga: {{$makanan->price}}</p>
+              <h3>{{$makanan->menu_name}}</h3>
+              <p>{{$makanan->menu_description}}</p>
+              <p>Harga: {{$makanan->menu_price}}</p>
+              <p>Tipe:
+                @if ($makanan->menu_type)
+                  Minuman
+                @else
+                  Makanan
+                @endif 
+              </p>
+              <p>Status: 
+                @if ($makanan->menu_status)
+                  Tersedia
+                @else
+                  Belum tersedia
+                @endif
+              </p>
+              <p>Toko: {{$makanan->store_name}}</p>
+            </div>
+            <div>
+              <a href="{{url('/makanan/edit/'.$makanan->id)}}" role="button" class="btn btn-primary">Edit Makanan</a>
             </div>
           </div>
         </div>

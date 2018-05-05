@@ -17,13 +17,18 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('name');
-            $table->integer('role')->default(1);
-            $table->integer('toko_id')->nullable();
-            $table->boolean('verified')->default(0);
+            $table->string('user_name');
+            $table->integer('user_role')->default(0);
+            $table->integer('toko_id')->unsigned()->nullable();
+            $table->boolean('is_user_verified')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('toko_id')->references('id')->on('stores');
+
+            $table->foreign('toko_id')
+                ->references('id')
+                ->on('stores')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

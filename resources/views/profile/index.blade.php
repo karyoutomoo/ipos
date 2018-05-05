@@ -15,42 +15,41 @@
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
-          @if ($user->role == 2)
+          {{-- If penjual, tampilkan toko --}}
+          @if ($user->user_role == 1)
             <th>Toko</th>
           @endif
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{{$user->name}}</td>
+          <td>{{$user->user_name}}</td>
           <td>{{$user->email}}</td>
           <td>
-            @switch($user->role)
-              @case(2)  
+            @switch($user->user_role)
+              @case(1)  
                 Penjual
                 @break
-              @case(3)  
+              @case(2)  
                 Kasir
+                @break
+              @case(3)
+                Admin
                 @break
               @default
                 Pembeli
             @endswitch
           </td>
-          @if ($user->role == 2)
+          @if ($user->user_role == 1)
             <td>
-              @if ($user->toko_id == 0)
-                Belum ada toko
+              @if ($user->toko_id)
+                {{$store->store_name}}
               @else
-                {{$user->toko_id}}
+                Belum ada toko
               @endif
             </td>
           @endif
         </tr>
-{{--         <tr>
-          <td>Brian</td>
-          <td>brian{{'@'}}gmail.com</td>
-          <td>Customer</td>
-        </tr> --}}
       </tbody>
     </table>
   </div>

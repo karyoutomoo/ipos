@@ -22,6 +22,10 @@
         <label>Deskripsi</label>
         <input type="textarea" name="deskripsi" placeholder="Deskripsikan makanan semenarik mungkin">
       </div>
+      <div class="radio">
+        <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Makanan</label>
+        <label class="radio-inline"><input type="radio" name="tipe_menu" value="1">Minuman</label>
+      </div>
       <div>
         <label>Gambar</label>
         <input type="file" name="gambar_makanan">

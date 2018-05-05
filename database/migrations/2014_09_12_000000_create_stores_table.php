@@ -16,9 +16,9 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('store_name');
-            $table->string('location');
-            $table->boolean('status')->default(0);
-            $table->boolean('verified')->default(0);
+            $table->string('store_location');
+            $table->boolean('store_status')->default(0);
+            $table->boolean('is_store_verified')->default(0);
             $table->timestamps();
         });
     }

@@ -15,15 +15,10 @@ Auth::routes();
 Route::get('/', function () { return view('welcome'); });
 
 
-// Route::resource('/makanan', 'FoodsController');
-// Route::get('/lihatmakanan', 'FoodsController@index')->name('viewfood');
-// Route::get('/tambahmakanan', 'FoodsController@tambah');
-// Route::post('/tambahmakanan', 'FoodsController@create')->name('submitmakanan');
-
 Route::group(['prefix' => 'makanan'], function(){
-  Route::get('/', 'FoodsController@index');
-  Route::get('buat', 'FoodsController@create_index');
-  Route::post('buat', 'FoodsController@create');
+  Route::get('/', 'MenusController@index');
+  Route::get('buat', 'MenusController@create_index');
+  Route::post('buat', 'MenusController@create');
 });
 
 Route::get('/pemesanan', 'OrdersController@index')->name('order');
@@ -34,6 +29,8 @@ Route::prefix('toko')->group(function(){
   Route::post('buat', 'StoresController@create');
   Route::get('daftar', 'StoresController@register_index');
   Route::post('daftar', 'StoresController@register');
+  Route::get('edit/{id}', 'StoresController@edit_index');
+  Route::post('edit/{id}', 'StoresController@edit');
 });
 
 // Order page
@@ -52,7 +49,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('profile')->group(function(){
   Route::get('/', 'ProfileController@index');
   Route::get('/password', 'ProfileController@password');
+  Route::get('/status', 'ProfileController@status_index');
 });
 
-Route::resource('/status', 'StatusController');
-Route::get('/status', 'StatusController@index')->name('status');

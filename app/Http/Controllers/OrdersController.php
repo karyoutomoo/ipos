@@ -20,13 +20,10 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $foods = Menu::where('type', 'food')->get();
-        $beverages = Menu::where('type', 'beverage')->get();
+        $data['foods'] = Menu::where('menu_type', 0)->get();
+        $data['beverages'] = Menu::where('menu_type', 1)->get();
 
-        return view('order.index', [
-            'foods' => $foods,
-            'beverages' => $beverages
-        ]);
+        return view('order.index', $data);
     }
 
     /**

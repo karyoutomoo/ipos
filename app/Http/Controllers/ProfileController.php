@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Store;
+use App\Order;
+use DB;
 use Auth;
 
 class ProfileController extends Controller
@@ -17,12 +20,24 @@ class ProfileController extends Controller
     {
         $id_user = Auth::user()->id;
         $data['user'] = User::find($id_user); 
+        $toko_user = Auth::user()->toko_id;
+        if ($toko_user) {
+            $data['store'] = Store::find($toko_user);
+        }
         return view('profile.index', $data);
     }
 
     public function password()
     {
         return view('profile.password');
+    }
+
+    public function status_index()
+    {
+        $id_user = Auth::user()->id;
+        $data['orders'] = Order::where('user_id', $id_user)->get();
+        
+        return view('status.index', $data);
     }
 
     /**

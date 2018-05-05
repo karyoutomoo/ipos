@@ -27,7 +27,7 @@ class StoresController extends Controller
     public function create(Request $request){
       $newStore = new Store();
       $newStore->store_name = $request['nama_toko'];
-      $newStore->location = $request['lokasi'];
+      $newStore->store_location = $request['lokasi'];
       $newStore->save();
 
       return redirect('toko')->with('status', '2');

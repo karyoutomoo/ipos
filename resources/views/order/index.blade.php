@@ -11,21 +11,21 @@
 <div class="row">
   @foreach ($foods as $food)
     <div class="col-sm-6 col-md-4">
-      <div class="menu thumbnail" data-id="{{ $food->id }}" data-name="{{ $food->name }}" data-price="{{ $food->price }}">
-        <a href="{{route('viewfood')}}">
-          <img src="image/soto.jpg" alt="{{ $food->name }}">
+      <div class="menu thumbnail" data-id="{{ $food->id }}" data-name="{{ $food->menu_name }}" data-price="{{ $food->menu_price }}">
+        <a href="{{asset($food->menu_imagepath)}}">
+          <img src="{{asset($food->menu_imagepath)}}" alt="{{ $food->name }}">
         </a>
         <div class="caption">
-          <h5>{{ $food->name }}</h5>
-          <h3>Rp. {{ $food->price }}</h3>
+          <h5>{{ $food->menu_name }}</h5>
+          <h3>Rp. {{ $food->menu_price }}</h3>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="change('sotoAmount',false)"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('{{'amountfood'.$food->id}}',false)"><b>-</b></button>
               </span>
-              <input type="number" min="0" class="qty form-control" placeholder="0">
+              <input id="{{'amountfood'.$food->id}}" type="number" min="0" class="qty form-control" placeholder="0">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onclick="change('sotoAmount',true)"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('{{'amountfood'.$food->id}}',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -39,9 +39,9 @@
 <div class="row">
   @foreach ($beverages as $beverage)
     <div class="col-sm-6 col-md-4">
-      <div class="menu thumbnail" data-id="{{ $beverage->id }}" data-name="{{ $beverage->name }}" data-price="{{ $beverage->price }}">
-        <a href="{{route('viewfood')}}">
-          <img src="image/soto.jpg" alt="{{ $beverage->name }}">
+      <div class="menu thumbnail" data-id="{{ $beverage->id }}" data-name="{{ $beverage->menu_name }}" data-price="{{ $beverage->menu_price }}">
+        <a href="{{asset($beverage->menu_imagepath)}}">
+          <img src="{{asset($beverage->menu_imagepath)}}" alt="{{ $beverage->name }}">
         </a>
         <div class="caption">
           <h5>{{ $beverage->name }}</h5>
@@ -49,11 +49,11 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="change('tehPociAmount',false)"><b>-</b></button>
+                <button class="btn btn-default" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',false)"><b>-</b></button>
               </span>
-              <input type="number" min="0" class="qty form-control" placeholder="0">
+              <input type="number" min="0" class="qty form-control" placeholder="0" id="{{'amountfood'.$beverage->menu_name}}">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onclick="change('tehPociAmount',true)"><b>+</b></button>
+                <button class="btn btn-primary" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',true)"><b>+</b></button>
               </span>
             </div>
           </div>
@@ -66,12 +66,14 @@
 <div class="footer">
   <div class="container">
     <p>
-{{--         <h3 class="left">
+      {{-- 
+      <h3 class="left">
         Total Harga:
         <span id="totalAmount">0</span> 
       </h3>
---}}        <div class="form-group">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-confirmation" onclick="order()">Pesan</button>
+       --}}
+      <div class="form-group">
+        <button id="orderButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-confirmation" onclick="order()">Pesan</button>
       </div>
     </p>
   </div>
@@ -83,7 +85,7 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <form class="modal-content" method="post">
+    <form class="modal-content" method="POST">
       {{ csrf_field() }}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -94,10 +96,10 @@
         <table id="order-table" class="table fixed-layout">
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Qty*Price</th>
+              <th>Menu</th>
+              <th>Jumlah</th>
+              <th>Harga Satuan</th>
+              <th>Harga</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -118,7 +120,6 @@
           <!-- <a href="{{route('status')}}" class="btn btn-primary">Yes</a> -->
         </form>
       </div>
-    </form>
 
   </div>
 </div>
@@ -139,6 +140,21 @@
 
 @section('js')
   <script type="text/javascript">
+    var total_item = 0;
+
+    function change(id, isPlus){
+      var e = document.getElementById(id);
+      if (isPlus){
+        e.value = +e.value+1;
+        total_item = +total_item+1;
+      } else if(e.value > 0){
+        e.value = +e.value-1;
+        total_item = +total_item-1;
+      } else {
+        e.value = +0;
+      }
+    }
+
     function order() {
       var menus = document.querySelectorAll('.menu');
       var table = document.querySelector('#order-table tbody');

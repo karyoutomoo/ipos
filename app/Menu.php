@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    protected $fillable = ['menu_name', 'toko_id', 'menu_description', 'menu_price', 'menu_imagepath', 'menu_status'];
     /**
      * Get the store that owns the menu.
      */

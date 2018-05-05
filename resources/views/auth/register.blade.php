@@ -18,13 +18,13 @@
             <form action="{{ url(config('adminlte.register_url', 'register')) }}" method="post">
                 {!! csrf_field() !!}
 
-                <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
+                <div class="form-group has-feedback {{ $errors->has('user_name') ? 'has-error' : '' }}">
+                    <input type="text" name="user_name" class="form-control" value="{{ old('user_name') }}"
                            placeholder="{{ trans('adminlte::adminlte.full_name') }}">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    @if ($errors->has('name'))
+                    @if ($errors->has('user_name'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong>{{ $errors->first('user_name') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -59,10 +59,10 @@
                     @endif
                 </div>
                 <div class="form-group">
-                  <select name="role">
-                    <option value="1">Pembeli</option>
-                    <option value="2">Penjual</option>
-                    <option value="3">Kasir</option>
+                  <select name="user_role">
+                    <option value="0">Pembeli</option>
+                    <option value="1">Penjual</option>
+                    <option value="2">Kasir</option>
                   </select>
                 </div>
                 <button type="submit"

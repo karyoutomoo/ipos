@@ -15,15 +15,21 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('type');
-            $table->decimal('price',8,2);
-            $table->text('description');
-            $table->string('imagepath');
-            $table->string('status');
-            $table->integer('store_id');
+            $table->string('menu_name');
+            $table->boolean('menu_type');
+            $table->decimal('menu_price',8,2);
+            $table->text('menu_description');
+            $table->string('menu_imagepath');
+            $table->string('menu_status')->default(0);
+            $table->integer('toko_id')->unsigned();
             $table->timestamps();
-            $table->foreign('store_id')->references('id')->on('stores');
+            $table->softDeletes();
+
+            $table->foreign('toko_id')
+                ->references('id')
+                ->on('stores')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

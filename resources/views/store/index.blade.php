@@ -21,9 +21,9 @@
           <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$t->store_name}}</td>
-            <td>{{$t->location}}</td>
+            <td>{{$t->store_location}}</td>
             <td>
-              @if ($t->status)
+              @if ($t->store_status)
                 Buka
               @else  
                 Tutup
