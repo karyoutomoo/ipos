@@ -21,8 +21,6 @@ Route::group(['prefix' => 'makanan'], function(){
   Route::post('buat', 'MenusController@create');
 });
 
-Route::get('/pemesanan', 'OrdersController@index')->name('order');
-
 Route::prefix('toko')->group(function(){
   Route::get('/', 'StoresController@index');
   Route::get('buat', 'StoresController@create_index');
@@ -34,8 +32,11 @@ Route::prefix('toko')->group(function(){
 });
 
 // Order page
-Route::get('/order', 'OrdersController@index')->name('order');
-Route::post('/order', 'OrdersController@store');
+Route::prefix('pemesanan')->group(function(){
+  Route::get('/', 'OrdersController@index');
+  Route::post('/', 'OrdersController@store');
+  Route::get('/status', 'OrdersController@status_index');
+});
 
 // Order status
 Route::get('/status', 'OrdersController@status')->name('status');
@@ -46,9 +47,10 @@ Route::group(['middleware' => 'cekpenjual'], function(){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 Route::prefix('profile')->group(function(){
   Route::get('/', 'ProfileController@index');
-  Route::get('/password', 'ProfileController@password');
-  Route::get('/status', 'ProfileController@status_index');
+  Route::get('/password', 'ProfileController@password_index');
+  Route::post('/password', 'ProfileController@password');
 });
 

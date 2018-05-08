@@ -85,7 +85,7 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <form class="modal-content" method="POST">
+    <form class="modal-content" method="POST" action="{{url('pemesanan')}}">
       {{ csrf_field() }}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -8,7 +8,8 @@
 
 @section('content')
   <div>
-    <form>
+    <form method="POST" action="{{url('/password')}}">
+      {{csrf_field()}}
       <div class="form-group">
         <label>Old Password</label>
         <input type="password" name="old_pass">

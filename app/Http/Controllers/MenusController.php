@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Menu;
 use App\Stores;
 use DB;
@@ -27,7 +28,9 @@ class MenusController extends Controller
   }
 
   public function create_index(){
-    return view('menu.create');
+    $id_user = Auth::user()->id;
+    $data['user'] = User::find($id_user);
+    return view('menu.create', $data);
   }
 
   public function create(Request $request){
@@ -41,7 +44,8 @@ class MenusController extends Controller
     $Menu->menu_type = $request['tipe_menu'];
     
     $image = $request->file('gambar_makanan');
-    $image_name = time().'.'.$image->getClientOriginalExtension();
+    $image_name = $Menu->menu_name.'.'.$image->getClientOriginalExtension();
+    // $image_name = time().'.'.$image->getClientOriginalExtension();
     $image->storeAs('public/makanan', $image_name);
     
     $Menu->menu_imagepath= 'storage/makanan/'.$image_name;

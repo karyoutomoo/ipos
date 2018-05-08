@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+  @if ($user->toko_id)
   <div>
     <form method="POST" action="{{url('makanan/buat')}}" enctype="multipart/form-data">
       {{ csrf_field() }}
@@ -33,4 +34,11 @@
       <button type="submit">Submit</button>
     </form>
   </div>
+  @else
+  <div>
+    Anda belum terdaftar toko. Silahkan coba lagi setelah terdaftar dalam toko:
+    <a href="{{url('/toko/buat')}}" role="button" class="btn btn-primary">Buat Toko Baru</a>
+    <a href="{{url('/toko/daftar')}}" role="button" class="btn btn-primary">Daftar ke Toko</a>
+  </div>
+  @endif
 @endsection

@@ -27,17 +27,29 @@ class ProfileController extends Controller
         return view('profile.index', $data);
     }
 
-    public function password()
+    public function password_index()
     {
         return view('profile.password');
     }
 
-    public function status_index()
+    public function password(Request $request)
     {
         $id_user = Auth::user()->id;
-        $data['orders'] = Order::where('user_id', $id_user)->get();
-        
-        return view('status.index', $data);
+
+        $old_pass = bcrypt($request['old_pass']);
+        $new_pass = bcrypt($request['new_pass']);
+        $new_pass2 = bcrypt($request['new_pass_second']);
+        // validasi: cek pass lama harus sama dengan db, harus beda dgn pass baru
+
+        // validasi: cek pass baru harus sama dgn pass baru2
+
+        // ganti password
+        $user = User::find($id_user);
+        $user->password = $new_pass;
+        $user->save();
+
+        // success message
+        return redirect('password');
     }
 
     /**

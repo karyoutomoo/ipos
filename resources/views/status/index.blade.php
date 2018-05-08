@@ -23,15 +23,13 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($orders as $order)
-          @foreach ($order->orderItems as $item)
-            <tr>
-              <td>{{ $item->order_id }}</td>
-              <td>{{ $item->menu->name }}</td>
-              <td>{{ $item->qty }}</td>
-              <td>{{ $item->status }}</td>
-            </tr>
-          @endforeach
+        @foreach ($orders as $item)
+          <tr>
+            <td>{{ $item->order_id }}</td>
+            <td>{{ $item->menu_name }}</td>
+            <td>{{ $item->qty }}</td>
+            <td>{{ $item->order_item_status }}</td>
+          </tr>
         @endforeach
       </tbody>
     </table>
