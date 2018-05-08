@@ -36,6 +36,7 @@ class OrdersController extends Controller
             ->join('order_items', 'orders.id','=','order_items.order_id')
             ->join('menus', 'menus.id','=','order_items.menu_id')
             ->select('users.user_name', 'order_items.*', 'menus.*')
+            ->orderBy('order_items.order_id', 'DESC')
             ->get();
 
         return view('status.index', $data);
@@ -56,7 +57,7 @@ class OrdersController extends Controller
             $item->qty = $qty;
             $item->order_item_status = 'PENDING';
             $item->order_id = $order->id;
-            $item->save;
+            $item->save();
             // $order->orderItems()->save($item);
         }
 
