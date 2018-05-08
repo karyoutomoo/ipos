@@ -20,6 +20,7 @@ class CreateStoresTable extends Migration
             $table->boolean('store_status')->default(0);
             $table->boolean('is_store_verified')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

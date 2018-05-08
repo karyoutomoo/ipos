@@ -25,12 +25,12 @@ class StoresController extends Controller
     }
 
     public function create(Request $request){
-      $newStore = new Store();
-      $newStore->store_name = $request['nama_toko'];
-      $newStore->store_location = $request['lokasi'];
-      $newStore->save();
+      $toko = new Store();
+      $toko->store_name = $request['nama_toko'];
+      $toko->store_location = $request['lokasi'];
+      $toko->save();
 
-      return redirect('toko')->with('status', '2');
+      return redirect('toko')->with('status', 'Berhasil membuat toko baru');
     }
 
     public function register_index(){
@@ -44,6 +44,34 @@ class StoresController extends Controller
       $penjual->toko_id = $request['toko_id'];
       $penjual->save();
 
-      return redirect('toko')->with('status', '1');
+      return redirect('toko')->with('status', 'Berhasil mendaftar pada toko');
+    }
+
+    public function edit_index($store_id){
+      $data['toko'] = Store::find($store_id);
+      return view('store.edit', $data);
+    }
+
+    public function edit(Request $request, $store_id){
+      $toko = Store::find($store_id);
+      $toko->store_name = $request['nama_toko'];
+      $toko->store_location = $request['lokasi'];
+      $toko->save();
+
+      return redirect('toko')->with('status', 'Berhasil mengupdate informasi toko');
+    }
+
+    public function delete(Request $request){
+      $toko_id = $request['toko_id'];
+      $users = User::where('toko_id',$toko_id)->get();
+
+      foreach ($users as $user) {
+        $user->toko_id = NULL;
+        $user->save();
+      }
+
+      $toko = Store::find($toko_id);
+      $toko->delete();
+      return redirect('toko')->with('Berhasil menghapus toko');
     }
 }

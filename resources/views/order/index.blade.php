@@ -89,10 +89,9 @@
       {{ csrf_field() }}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Order Confirmation</h4>
+        <h4 class="modal-title">Konfirmasi Pemesanan</h4>
       </div>
       <div class="modal-body">
-        <!-- <p>Nomor Pemesanan: 44</p> -->
         <table id="order-table" class="table fixed-layout">
           <thead>
             <tr>
@@ -114,10 +113,9 @@
         <div id="order-form"></div>
       </div>
       <div class="modal-footer">
-          Are You Sure ?
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Yes</button>
-          <!-- <a href="{{route('status')}}" class="btn btn-primary">Yes</a> -->
+          Apakah anda yakin ?
+          <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
+          <button type="submit" class="btn btn-primary">Pesan</button>
         </form>
       </div>
 
@@ -140,16 +138,14 @@
 
 @section('js')
   <script type="text/javascript">
-    var total_item = 0;
-
+    // to do: disable button when not ordering
+    
     function change(id, isPlus){
       var e = document.getElementById(id);
       if (isPlus){
         e.value = +e.value+1;
-        total_item = +total_item+1;
       } else if(e.value > 0){
         e.value = +e.value-1;
-        total_item = +total_item-1;
       } else {
         e.value = +0;
       }

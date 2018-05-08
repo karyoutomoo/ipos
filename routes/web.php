@@ -13,12 +13,12 @@
 Auth::routes();
 
 Route::get('/', function () { return view('welcome'); });
+Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::group(['prefix' => 'makanan'], function(){
-  Route::get('/', 'MenusController@index');
-  Route::get('buat', 'MenusController@create_index');
-  Route::post('buat', 'MenusController@create');
+Route::prefix('profile')->group(function(){
+  Route::get('/', 'ProfileController@index');
+  Route::get('password', 'ProfileController@password_index');
+  Route::post('password', 'ProfileController@password');
 });
 
 Route::prefix('toko')->group(function(){
@@ -27,30 +27,26 @@ Route::prefix('toko')->group(function(){
   Route::post('buat', 'StoresController@create');
   Route::get('daftar', 'StoresController@register_index');
   Route::post('daftar', 'StoresController@register');
-  Route::get('edit/{id}', 'StoresController@edit_index');
-  Route::post('edit/{id}', 'StoresController@edit');
+  Route::get('edit/{store}', 'StoresController@edit_index');
+  Route::put('edit/{store}', 'StoresController@edit');
+  Route::delete('delete', 'StoresController@delete');
+});
+
+Route::prefix('makanan')->group(function(){
+  Route::get('/', 'MenusController@index');
+  Route::get('buat', 'MenusController@create_index');
+  Route::post('buat', 'MenusController@create');
+  Route::get('edit/{menu}', 'MenusController@edit_index');
+  Route::post('edit/{menu}', 'MenusController@edit');
 });
 
 // Order page
 Route::prefix('pemesanan')->group(function(){
   Route::get('/', 'OrdersController@index');
   Route::post('/', 'OrdersController@store');
-  Route::get('/status', 'OrdersController@status_index');
+  Route::get('status', 'OrdersController@status_index');
 });
-
-// Order status
-Route::get('/status', 'OrdersController@status')->name('status');
 
 Route::group(['middleware' => 'cekpenjual'], function(){
-});
-
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::prefix('profile')->group(function(){
-  Route::get('/', 'ProfileController@index');
-  Route::get('/password', 'ProfileController@password_index');
-  Route::post('/password', 'ProfileController@password');
 });
 

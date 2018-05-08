@@ -27,8 +27,7 @@ class CreateUsersTable extends Migration
             $table->foreign('toko_id')
                 ->references('id')
                 ->on('stores')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onUpdate('cascade');
         });
     }
 
