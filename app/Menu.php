@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
-    protected $fillable = ['menu_name', 'toko_id', 'menu_description', 'menu_price', 'menu_imagepath', 'menu_status'];
+    protected $fillable = ['menu_name', 'store_id', 'menu_description', 'menu_price', 'menu_imagepath', 'menu_status'];
     /**
      * Get the store that owns the menu.
      */
@@ -21,5 +21,21 @@ class Menu extends Model
     public function orderItems()
     {
         return $this->hasMany('App\OrderItem');
+    }
+
+    /**
+     * Get reviews.
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    /**
+     * Get avg rating.
+     */
+    public function rating()
+    {
+        return $this->reviews()->select('rating')->avg('rating');
     }
 }

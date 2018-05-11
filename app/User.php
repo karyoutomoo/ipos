@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'email', 'password', 'user_role', 'toko_id',
+        'user_name', 'email', 'password', 'user_role', 'store_id',
     ];
 
     /**
@@ -42,5 +42,13 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+
+    /**
+     * Get reviews from the user.
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
     }
 }

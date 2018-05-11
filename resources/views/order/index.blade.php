@@ -18,6 +18,13 @@
         <div class="caption">
           <h5>{{ $food->menu_name }}</h5>
           <h3>Rp. {{ $food->menu_price }}</h3>
+
+          @if(empty($food->rating()))
+            <p>Belum ada rating</p>
+          @else
+            <p>Rating {{ number_format($food->rating(), 2) }}</p>
+          @endif
+
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
@@ -44,8 +51,15 @@
           <img src="{{asset($beverage->menu_imagepath)}}" alt="{{ $beverage->name }}">
         </a>
         <div class="caption">
-          <h5>{{ $beverage->name }}</h5>
-          <h3>Rp. {{ $beverage->price }}</h3>
+          <h5>{{ $beverage->menu_name }}</h5>
+          <h3>Rp. {{ $beverage->menu_price }}</h3>
+
+          @if(empty($beverage->rating()))
+            <p>Belum ada rating</p>
+          @else
+            <p>Rating {{ number_format($beverage->rating(), 2) }}</p>
+          @endif
+
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-btn">

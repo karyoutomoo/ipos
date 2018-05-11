@@ -129,10 +129,16 @@ return [
             'text'        => 'Pemesanan',
             'url'         => 'pemesanan',
             'icon'        => 'bank',
-        ],[
+        ],
+        [
             'text'        => 'Status',
             'url'         => 'pemesanan/status',
             'icon'        => 'file',
+        ],
+        [
+            'text'        => 'Ulasan',
+            'url'         => 'ulasan',
+            'icon'        => 'pencil',
         ],
         [
             'text'        => 'Makanan',

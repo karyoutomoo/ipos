@@ -21,7 +21,7 @@ class MenusController extends Controller
   public function index(){
     // $data['makanans'] = Menu::get();
     $data['makanans'] = DB::table('menus')
-      ->join('stores', 'menus.toko_id','=','stores.id')
+      ->join('stores', 'menus.store_id','=','stores.id')
       ->select('menus.*', 'stores.store_name')
       ->get();
     return view('menu.index', $data);
@@ -37,7 +37,7 @@ class MenusController extends Controller
     $user = Auth::user();
     $Menu = new Menu();
     
-    $Menu->toko_id = $user['toko_id'];
+    $Menu->store_id = $user['toko_id'];
     $Menu->menu_name = $request['nama_makanan'];
     $Menu->menu_price = $request['harga'];
     $Menu->menu_description = $request['deskripsi'];

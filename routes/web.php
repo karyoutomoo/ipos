@@ -47,6 +47,11 @@ Route::prefix('pemesanan')->group(function(){
   Route::get('status', 'OrdersController@status_index');
 });
 
+Route::prefix('ulasan')->group(function(){
+  Route::get('/', 'ReviewsController@index');
+  Route::post('buat', 'ReviewsController@store');
+});
+
 Route::group(['middleware' => 'cekpenjual'], function(){
 });
 
