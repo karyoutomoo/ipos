@@ -21,11 +21,11 @@ class CreateMenusTable extends Migration
             $table->text('menu_description');
             $table->string('menu_imagepath');
             $table->string('menu_status')->default(0);
-            $table->integer('toko_id')->unsigned();
+            $table->integer('store_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('toko_id')
+            $table->foreign('store_id')
                 ->references('id')
                 ->on('stores')
                 ->onUpdate('cascade')
