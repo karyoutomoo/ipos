@@ -53,6 +53,32 @@ class MenusController extends Controller
     return redirect('makanan'); 
   }
 
+  public function edit_index($menu_id){
+    $data['toko_id'] = Auth::user()->toko_id;
+    $data['menu'] = Menu::find($menu_id);
+    return view('menu.edit', $data);
+  }
+
+  public function edit(Request $request, $menu_id){
+    $user = Auth::user();
+    $Menu = Menu::find($menu_id);
+    
+    $Menu->toko_id = $user['toko_id'];
+    $Menu->menu_name = $request['nama_makanan'];
+    $Menu->menu_price = $request['harga'];
+    $Menu->menu_description = $request['deskripsi'];
+    $Menu->menu_type = $request['tipe_menu'];
+    
+    $image = $request->file('gambar_makanan');
+    $image_name = $Menu->id.'.'.$image->getClientOriginalExtension();
+    // $image_name = time().'.'.$image->getClientOriginalExtension();
+    $image->storeAs('public/makanan', $image_name);
+    
+    $Menu->menu_imagepath= 'storage/makanan/'.$image_name;
+    $Menu->save();
+    return redirect('makanan'); 
+  }
+
   // API Controllers:
   public function show(Menu $Menu){
     return $Menu;

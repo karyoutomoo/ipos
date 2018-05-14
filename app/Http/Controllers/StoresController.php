@@ -16,6 +16,7 @@ class StoresController extends Controller
     }
 
     public function index(){
+      $data['seller_id'] = Auth::user()->toko_id;
       $data['toko'] = Store::get();
       return view('store.index', $data);
     }
@@ -42,6 +43,17 @@ class StoresController extends Controller
       $id_penjual = Auth::user()->id;
       $penjual = User::find($id_penjual);
       $penjual->toko_id = $request['toko_id'];
+      $penjual->is_user_verified = false;
+      $penjual->save();
+
+      return redirect('toko')->with('status', 'Berhasil mendaftar pada toko');
+    }
+
+    public function register_button(Request $request){
+      $id_penjual = Auth::user()->id;
+      $penjual = User::find($id_penjual);
+      $penjual->toko_id = $request['register_toko_id'];
+      $penjual->is_user_verified = false;
       $penjual->save();
 
       return redirect('toko')->with('status', 'Berhasil mendaftar pada toko');
@@ -73,5 +85,17 @@ class StoresController extends Controller
       $toko = Store::find($toko_id);
       $toko->delete();
       return redirect('toko')->with('Berhasil menghapus toko');
+    }
+
+    public function toggle(Request $request){
+      $toko_id = $request['status_toko_id'];
+      $toko = Store::find($toko_id);
+      if ($toko->store_status) {
+        $toko->store_status = false;
+      } else {
+        $toko->store_status = true;
+      }
+      $toko->save();
+      return redirect('toko')->with('Berhasil mengubah status toko');
     }
 }

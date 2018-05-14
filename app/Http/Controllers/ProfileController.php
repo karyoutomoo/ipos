@@ -34,8 +34,7 @@ class ProfileController extends Controller
 
     public function password(Request $request)
     {
-        $id_user = Auth::user()->id;
-
+        $user = Auth::user();
         $old_pass = bcrypt($request['old_pass']);
         $new_pass = bcrypt($request['new_pass']);
         $new_pass2 = bcrypt($request['new_pass_second']);
@@ -44,12 +43,19 @@ class ProfileController extends Controller
         // validasi: cek pass baru harus sama dgn pass baru2
 
         // ganti password
-        $user = User::find($id_user);
         $user->password = $new_pass;
         $user->save();
 
         // success message
         return redirect('password');
+    }
+
+    public function left(){
+        $user = Auth::user();
+        $user->toko_id = NULL;
+        $user->save();
+
+        return redirect('profile')->with('Berhasill meninggalkan toko');
     }
 
     /**

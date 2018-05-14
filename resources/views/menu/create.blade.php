@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'IPOS - Tambah Makanan')
+@section('title', 'IPOS - Tambah Menu')
 
 @section('content_header')
-  <h1>Makanan - Tambah</h1>
+  <h1>Menu - Tambah</h1>
 @endsection
 
 @section('content')
@@ -12,16 +12,16 @@
     <form method="POST" action="{{url('makanan/buat')}}" enctype="multipart/form-data">
       {{ csrf_field() }}
       <div>
-        <label>Nama Makanan</label>
-        <input type="text" name="nama_makanan" placeholder="Nama Makanan">
+        <label>Nama Menu</label>
+        <input type="text" name="nama_makanan" placeholder="Nama Menu">
       </div>
       <div>
         <label>Harga</label>
-        <input type="number" name="harga" placeholder="Harga Makanan">
+        <input type="number" name="harga" placeholder="Harga Menu">
       </div>
       <div>
         <label>Deskripsi</label>
-        <input type="textarea" name="deskripsi" placeholder="Deskripsikan makanan semenarik mungkin">
+        <input type="textarea" name="deskripsi" placeholder="Deskripsikan menu semenarik mungkin">
       </div>
       <div class="radio">
         <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Makanan</label>

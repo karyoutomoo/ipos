@@ -8,6 +8,7 @@
 
 @section('content')
   @if ($toko->count())
+  <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -15,7 +16,7 @@
           <th>Nama Toko</th>
           <th>Lokasi</th>
           <th>Status</th>
-          <th colspan="2">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -26,17 +27,51 @@
             <td>{{$t->store_location}}</td>
             <td>
               @if ($t->store_status)
-                Buka
-              @else  
-                Tutup
+                <button class="btn btn-success">Buka</button>
+              @else
+                <button class="btn btn-warning">Tutup</button>
               @endif
-            </td>          
-            <td><a href="{{url('/toko/edit/'.$t->id)}}" role="button" class="btn btn-primary">Edit Toko</a></td> 
-            <td><button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#delete_confirmation" onclick="deleteStore('{{$t->id}}','{{$t->store_name}}','{{$t->store_location}}')">Hapus Toko</button></td>
+            </td>
+            @if ($seller_id == $t->id)
+            <td>
+              <form method="POST" action="{{url('/toko/toggle')}}">
+                {{csrf_field()}}
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="status_toko_id" value="{{$t->id}}"> 
+                  <button type="submit" class="btn btn-default">
+                    @if ($t->store_status)
+                      Tutup Toko
+                    @else 
+                      Buka Toko
+                    @endif
+                  </button> 
+              </form>
+            </td>
+            @elseif($seller_id)
+            <td></td>
+            @else
+            <td>
+              <form method="POST" action="{{url('/toko/register')}}">
+                {{csrf_field()}}
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="register_toko_id" value="{{$t->id}}">
+                <button type="submit" class="btn btn-default">Ikut Toko</button>
+              </form>
+            </td> 
+            @endif
+
           </tr>
         @endforeach
       </tbody>
     </table>
+  </div>
+
+    @if ($seller_id == $t->id)
+    <p>
+      <a href="{{url('/toko/edit/'.$t->id)}}" role="button" class="btn btn-default">Edit Toko</a>
+      <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#delete_confirmation" onclick="deleteStore('{{$t->id}}','{{$t->store_name}}','{{$t->store_location}}')">Hapus Toko</button>
+    </p>
+    @endif
 
     {{-- Modal starts here --}}
     <div id="delete_confirmation" class="modal fade" role="dialog">

@@ -17,6 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('profile')->group(function(){
   Route::get('/', 'ProfileController@index');
+  Route::put('/', 'ProfileController@left');
   Route::get('password', 'ProfileController@password_index');
   Route::post('password', 'ProfileController@password');
 });
@@ -30,6 +31,8 @@ Route::prefix('toko')->group(function(){
   Route::get('edit/{store}', 'StoresController@edit_index');
   Route::put('edit/{store}', 'StoresController@edit');
   Route::delete('delete', 'StoresController@delete');
+  Route::put('toggle','StoresController@toggle');
+  Route::put('register', 'StoresController@register_button');
 });
 
 Route::prefix('makanan')->group(function(){

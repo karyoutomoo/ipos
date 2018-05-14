@@ -6,25 +6,7 @@
   <h1>Daftar Makanan</h1>
 @endsection
 
-@section('content')
-  {{-- 
-  @if ($makanan->count())
-    @foreach ($makanan as $f)
-      {{ $f->id }}
-      {{ $f->name }}
-      {{ $f->outlet }}
-      {{ $f->description }}
-      {{ $f->price }}
-      {{ $f->availability }}
-      <br>
-    @endforeach
-  @else
-    <div>
-      Data Makanan Tidak Ditemukan
-    </div>
-  @endif
-  --}}
-  
+@section('content')  
   <a href="/makanan/buat" class="btn btn-primary">Buat Makanan</a>
   @if ($makanans->count())
       <div class="row">
@@ -84,25 +66,4 @@
   Hayaku Sushi
     Irrashaimase! Hayaku Sushi wa daisuki! Hayaku Sushi wa oishiiii desuyo! murah meriah enak
 --}}
-
-
-@endsection
-
-@section('css')
-  {{-- 
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 
-
-  <style type="text/css">
-    .card-img-top{
-      width:20rem;
-    }
-  </style>
-  --}}
-@endsection
-
-@section('js')
-  {{-- 
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script> 
-  --}}
 @endsection

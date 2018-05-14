@@ -14,10 +14,10 @@ class UsersTableSeeder extends Seeder
         factory(App\User::class, 5)->create();
         
         App\User::create([
-            'name' => 'Administrator',
+            'user_name' => 'Administrator',
             'email' => 'admin@test.com',
             'password' => Hash::make('iposxxx'),
-            'role' => 'administrator'
+            'user_role' => '3',
         ]);
     }
 }
