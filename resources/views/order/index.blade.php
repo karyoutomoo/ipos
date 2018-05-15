@@ -30,7 +30,9 @@
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" onclick="change('{{'amountfood'.$food->id}}',false)"><b>-</b></button>
               </span>
-              <input id="{{'amountfood'.$food->id}}" type="number" min="0" class="qty form-control" placeholder="0">
+
+              <input id="{{'amountfood'.$food->id}}" type="text" min="0" max="100" class="qty form-control" placeholder="0" readonly>
+
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="button" onclick="change('{{'amountfood'.$food->id}}',true)"><b>+</b></button>
               </span>
@@ -65,7 +67,9 @@
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',false)"><b>-</b></button>
               </span>
-              <input type="number" min="0" class="qty form-control" placeholder="0" id="{{'amountfood'.$beverage->menu_name}}">
+
+              <input type="number" min="0" class="qty form-control" placeholder="0" id="{{'amountfood'.$beverage->menu_name}}" readonly>
+
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',true)"><b>+</b></button>
               </span>
@@ -87,7 +91,7 @@
       </h3>
        --}}
       <div class="form-group">
-        <button id="orderButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-confirmation" onclick="order()">Pesan</button>
+        <button id="orderButton" type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#order-confirmation" onclick="order()">Pesan</button>
       </div>
     </p>
   </div>
@@ -126,13 +130,14 @@
         <!-- Hidden inputs -->
         <div id="order-form"></div>
       </div>
+    
       <div class="modal-footer">
-          Apakah anda yakin ?
-          <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
-          <button type="submit" class="btn btn-primary">Pesan</button>
-        </form>
+        <div align="center">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-success">Pesan</button>
+        </div>  
       </div>
-
+    </form>
   </div>
 </div>
 @endsection
@@ -143,8 +148,6 @@
       bottom:0;
       width:100%;
       text-align:center;
-      background-color: orange;
-      border-top:1px solid orange;
       color:#FFFFFF;
     }
   </style>
@@ -183,15 +186,15 @@
           table.innerHTML += '<tr>'
             + '<td>' + menu.dataset.name + '</td>'
             + '<td>' + qty + '</td>'
-            + '<td>' + menu.dataset.price + '</td>'
-            + '<td>' + pricex + '</td>'
+            + '<td>Rp' + menu.dataset.price + '</td>'
+            + '<td>Rp' + pricex + '.00</td>'
             + '</tr>';
 
           form.innerHTML += '<input name="items[' + menu.dataset.id + ']" type="hidden" value="' + qty + '">';
         }
       });
 
-      document.getElementById('total').innerHTML = total;
+      document.getElementById('total').innerHTML = ('Rp' + total + '.00');
     }
   </script>
 @endsection
