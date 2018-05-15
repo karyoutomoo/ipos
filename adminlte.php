@@ -112,38 +112,38 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
-        [
-            'text' => 'User',
-            'url'  => 'admin/user',
-            'can'  => 'manage-user',
-        ],
-        // [
-        //     'text'        => 'Pages',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'file',
-        //     // 'label'       => 4,
-        //     // 'label_color' => 'success',
-        // ],
+        'MENU UTAMA',
         [
             'text'        => 'Pemesanan',
-            'url'         => 'pemesanan',
-            'icon'        => 'bank',
-        ],
-        [
-            'text'        => 'Status Pemesanan',
-            'url'         => 'pemesanan/status',
-            'icon'        => 'file',
-        ],
-        [
-            'text'        => 'Ulasan',
-            'url'         => 'ulasan',
-            'icon'        => 'pencil',
+            'icon'        => 'book',
+            'submenu'     => [
+                [
+                    'text'        => 'Pesan Baru',
+                    'url'         => 'pemesanan',
+                    'icon'        => 'pencil',
+                ],
+                [
+                    'text'        => 'Status Pesanan',
+                    'url'         => 'pemesanan/status',
+                    'icon'        => 'bell',
+                ],
+            ],
         ],
         [
             'text'        => 'Menu',
-            'url'         => 'makanan',
             'icon'        => 'group',
+            'submenu'     => [
+                [
+                    'text'        => 'Lihat Menu',
+                    'url'         => 'makanan',
+                    'icon'        => 'coffee',
+                ],
+                [
+                    'text'        => 'Ulasan',
+                    'url'         => 'ulasan',
+                    'icon'        => 'thumbs-up',
+                ],
+            ],
         ],
         [
             'text'        => 'Toko',
@@ -154,13 +154,15 @@ return [
             'text'        => 'Pesanan Toko',
             'url'         => 'pemesanan/toko',
             'icon'        => 'balance-scale',
+            'can'         => 'is_seller',
         ],
         [
             'text'        => 'Kasir',
             'url'         => 'pemesanan/kasir',
             'icon'        => 'bank',
+            'can'         => 'is_cashier',
         ],
-        'ACCOUNT SETTINGS',
+        'PENGATURAN AKUN',
         [
             'text' => 'Profil',
             'url'  => 'profile',
@@ -171,6 +173,18 @@ return [
             'url'  => 'profile/password',
             'icon' => 'lock',
         ],
+        // [
+        //     'text' => 'User',
+        //     'url'  => 'admin/user',
+        //     'can'  => 'manage-user',
+        // ],
+        // [
+        //     'text'        => 'Pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
         // [
         //     'text'    => 'Multilevel',
         //     'icon'    => 'share',

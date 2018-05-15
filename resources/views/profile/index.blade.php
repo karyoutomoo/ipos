@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-  <div>
+  <div class="table-responsive">
     Your profile:
     <table class="table">
       <thead>

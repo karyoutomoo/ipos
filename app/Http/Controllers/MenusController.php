@@ -74,7 +74,7 @@ class MenusController extends Controller
     $user = Auth::user();
     $Menu = Menu::find($menu_id);
     
-    $Menu->toko_id = $user['toko_id'];
+    $Menu->store_id = $user['toko_id'];
     $Menu->menu_name = $request['nama_makanan'];
     $Menu->menu_price = $request['harga'];
     $Menu->menu_description = $request['deskripsi'];

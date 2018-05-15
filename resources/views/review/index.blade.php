@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  <div>
+  <div class="table-responsive">
     <h4>Beri ulasan:</h4>
     <table class="table">
       <thead>

@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  <div>
+  <div class="table-responsive">
     Pemesanan Atas Nama: {{$user_name}}
     <table class="table">
       <thead>
@@ -51,6 +51,8 @@
               Pesanan Selesai
             @elseif($item->order_item_status == "DIBATALKAN")
               Pesanan Dibatalkan
+            @elseif($item->order_item_status == "DITOLAK")
+              Pesanan Ditolak            
             @endif
             </td>
           </tr>

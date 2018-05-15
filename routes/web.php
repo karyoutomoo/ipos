@@ -65,6 +65,7 @@ Route::prefix('pemesanan')->group(function(){
     Route::get('toko', 'OrdersController@seller_index');
     Route::post('toko/accept', 'OrdersController@accept_order');
     Route::post('toko/close', 'OrdersController@close_order');
+    Route::post('toko/reject', 'OrdersController@reject_order');
   });
 });
 

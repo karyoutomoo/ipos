@@ -6,13 +6,20 @@
   <h1>Daftar Makanan</h1>
 @endsection
 
-@section('content')  
+@section('content')
+  <p>
+    Silahkan lakukan pemesanan di halaman berikut: 
+    <a href="{{url('pemesanan')}}" class="btn btn-primary">Pesan Makanan</a>
+  </p>  
   @if ($user_role)
-    <a href="/makanan/buat" class="btn btn-primary">Buat Makanan</a>
+  <p>
+    Anda Dapat mendaftarkan makanan outlet anda di halaman berikut:
+    <a href="{{url('/makanan/buat')}}" class="btn btn-primary">Buat Makanan</a>
+  </p>
   @endif
   @if ($makanans->count())
-      <div class="row">
-    @foreach ($makanans as $makanan)
+    <div class="row">
+      @foreach ($makanans as $makanan)
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
             <a href="{{asset($makanan->menu_imagepath)}}">
@@ -58,16 +65,8 @@
             @endif
           </div>
         </div>
-      {{-- 
-        {{$makanan->id}}
-        {{$makanan->store_id}}
-       --}}
-        @if ($loop->iteration % 3 == 0)
-          </div>
-          <div class="row">
-        @endif
-    @endforeach
-      </div>
+      @endforeach
+    </div>
   @else
     <div>
       Belum ada Makanan

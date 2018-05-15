@@ -60,6 +60,7 @@ class OrdersController extends Controller
             ->select('users.user_name', 'order_items.*', 'menus.menu_name')
             ->where('menus.store_id', '=', $toko_id)
             ->orderBy('order_items.order_id', 'DESC')
+            ->orderBy('order_items.order_item_status')
             ->get();
 
         return view('status.seller', $data);
@@ -148,6 +149,16 @@ class OrdersController extends Controller
         $order_item->save();
 
         return redirect('pemesanan/status');
+    }
+
+    public function reject_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'DITOLAK';
+        $order_item->save();
+
+        return redirect('pemesanan/toko');
     }
 
 }

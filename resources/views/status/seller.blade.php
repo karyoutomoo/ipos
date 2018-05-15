@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-  <div>
+  <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -35,6 +35,11 @@
                   <input type="hidden" name="order_item_id" value="{{$item->id}}">
                   <button type="submit" class="btn btn-default">Terima</button>  
                 </form>
+                <form method="POST" action="{{url('/pemesanan/toko/reject')}}">
+                  {{csrf_field()}}  
+                  <input type="hidden" name="order_item_id" value="{{$item->id}}">
+                  <button type="submit" class="btn btn-default">Tolak</button>  
+                </form>
               @elseif($item->order_item_status == "MOHON TUKAR")
                 <form method="POST" action="{{url('/pemesanan/toko/close')}}">
                   {{csrf_field()}}
@@ -49,6 +54,8 @@
                 Pesanan Selesai, Jangan Lupa Ajak Pembeli untuk Mengulas Sajian Anda
               @elseif($item->order_item_status == "DIBATALKAN")
                 Pesanan Dibatalkan
+              @elseif($item->order_item_status == "DITOLAK")
+                Pesanan Ditolak
               @endif
             </td>
           </tr>
