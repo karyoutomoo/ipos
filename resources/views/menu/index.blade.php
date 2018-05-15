@@ -7,7 +7,9 @@
 @endsection
 
 @section('content')  
-  <a href="/makanan/buat" class="btn btn-primary">Buat Makanan</a>
+  @if ($user_role)
+    <a href="/makanan/buat" class="btn btn-primary">Buat Makanan</a>
+  @endif
   @if ($makanans->count())
       <div class="row">
     @foreach ($makanans as $makanan)
@@ -17,28 +19,43 @@
               <img src="{{asset($makanan->menu_imagepath)}}" alt="{{$makanan->menu_name}}">
             </a>
             <div class="caption">
-              <h3>{{$makanan->menu_name}}</h3>
+              <h2>{{$makanan->menu_name}}</h2>
               <p>{{$makanan->menu_description}}</p>
-              <p>Harga: {{$makanan->menu_price}}</p>
-              <p>Tipe:
+              <p>
                 @if ($makanan->menu_type)
                   Minuman
                 @else
                   Makanan
                 @endif 
+                oleh {{$makanan->store_name}}
               </p>
-              <p>Status: 
-                @if ($makanan->menu_status)
-                  Tersedia
-                @else
-                  Belum tersedia
-                @endif
+              <p>
+                <h3>
+                  Rp. {{$makanan->menu_price}}
+                </h3>
               </p>
-              <p>Toko: {{$makanan->store_name}}</p>
+              <p>
+                <form method="POST" action="{{url('/makanan/toggle/')}}">
+                  {{csrf_field()}}
+                  <input type="hidden" name="menu_id" value="{{$makanan->id}}">
+                  Status: 
+                  @if ($makanan->menu_status)
+                    <button class="btn btn-success">Ada</button>
+                  @else
+                    <button class="btn btn-warning">Habis</button>
+                  @endif
+
+                  @if ($user_role)
+                    <button type="submit" class="btn btn-default">Ganti</button>
+                  @endif
+                </form>
+              </p>
             </div>
+            @if ($user_role)
             <div>
               <a href="{{url('/makanan/edit/'.$makanan->id)}}" role="button" class="btn btn-primary">Edit Makanan</a>
             </div>
+            @endif
           </div>
         </div>
       {{-- 

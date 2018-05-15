@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Menu;
-use App\Stores;
+use App\Store;
 use DB;
 use Auth;
 
@@ -24,6 +24,7 @@ class MenusController extends Controller
       ->join('stores', 'menus.store_id','=','stores.id')
       ->select('menus.*', 'stores.store_name')
       ->get();
+    $data['user_role'] = (Auth::user()->user_role == 1);
     return view('menu.index', $data);
   }
 
@@ -51,6 +52,15 @@ class MenusController extends Controller
     $Menu->menu_imagepath= 'storage/makanan/'.$image_name;
     $Menu->save();
     return redirect('makanan'); 
+  }
+
+  public function toggle(Request $request){
+    $menu_id = $request['menu_id'];
+    $menu = Menu::find($menu_id);
+    $menu->menu_status = $menu->menu_status? 0 : 1;
+    $menu->save();
+
+    return redirect('makanan');
   }
 
   public function edit_index($menu_id){

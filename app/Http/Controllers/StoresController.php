@@ -17,6 +17,7 @@ class StoresController extends Controller
 
     public function index(){
       $data['seller_id'] = Auth::user()->toko_id;
+      $data['user_role'] = (Auth::user()->user_role == 1);
       $data['toko'] = Store::get();
       return view('store.index', $data);
     }

@@ -16,7 +16,9 @@
           <th>Nama Toko</th>
           <th>Lokasi</th>
           <th>Status</th>
+          @if ($user_role)
           <th>Action</th>
+          @endif
         </tr>
       </thead>
       <tbody>
@@ -32,6 +34,7 @@
                 <button class="btn btn-warning">Tutup</button>
               @endif
             </td>
+            @if ($user_role)
             @if ($seller_id == $t->id)
             <td>
               <form method="POST" action="{{url('/toko/toggle')}}">
@@ -60,6 +63,7 @@
             </td> 
             @endif
 
+            @endif
           </tr>
         @endforeach
       </tbody>
@@ -103,10 +107,13 @@
   @else
     Belum ada toko yang terdaftar
   @endif
+
+  @if ($user_role)
   <p style="margin:10px 0;">
     <a href="{{url('toko/buat')}}" class="btn btn-primary">Buat Toko Baru</a>
     <a href="{{url('toko/daftar')}}" class="btn btn-primary">Daftar ke Toko</a>
   </p>
+  @endif
 @endsection
 
 @section('js')

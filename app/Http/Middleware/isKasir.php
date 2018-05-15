@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class isPenjual
+class isKasir
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class isPenjual
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->user_role != 1) {
+        if (Auth::user()->user_role != 2){
             return redirect('403');
         }
         return $next($request);

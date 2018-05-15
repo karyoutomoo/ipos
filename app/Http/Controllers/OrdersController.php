@@ -31,14 +31,41 @@ class OrdersController extends Controller
      *  Status page
      */
     public function status_index(){
-        $data['orders'] = DB::table('orders')
-            ->join('users','orders.user_id','=','users.id')
-            ->join('order_items', 'orders.id','=','order_items.order_id')
-            ->join('menus', 'menus.id','=','order_items.menu_id')
-            ->select('users.user_name', 'order_items.*', 'menus.*')
-            ->orderBy('order_items.order_id', 'DESC')
-            ->get();
+        $user_id = Auth::user()->id;
+        $toko_id = Auth::user()->toko_id;
+        $role = Auth::user()->user_role;
 
+        if ($role == 0) {
+            $data['orders'] = DB::table('orders')
+                ->join('users','orders.user_id','=','users.id')
+                ->join('order_items', 'orders.id','=','order_items.order_id')
+                ->join('menus', 'menus.id','=','order_items.menu_id')
+                ->select('users.id','users.user_name', 'order_items.*', 'menus.*')
+                ->where('users.id', $user_id)
+                ->orderBy('order_items.order_id', 'DESC')
+                ->get();
+        } else if ($role == 1) {
+            $data['orders'] = DB::table('orders')
+                ->join('users','orders.user_id','=','users.id')
+                ->join('order_items', 'orders.id','=','order_items.order_id')
+                ->join('menus', 'menus.id','=','order_items.menu_id')
+                ->select('users.user_name', 'order_items.*', 'menus.*')
+                ->where('menus.store_id', $toko_id)
+                ->orderBy('order_items.order_id', 'DESC')
+                ->get();
+        } else if ($role == 2){
+            $data['orders'] = DB::table('orders')
+                ->join('users','orders.user_id','=','users.id')
+                ->join('order_items', 'orders.id','=','order_items.order_id')
+                ->join('menus', 'menus.id','=','order_items.menu_id')
+                ->select('users.user_name', 'order_items.*', 'menus.*')
+                ->where('order_items.order_item_status', "DITERIMA")
+                ->orWhere('order_items.order_item_status', "LUNAS")
+                ->orderBy('order_items.order_id', 'DESC')
+                ->get();            
+        }
+
+        $data['user_role'] = $role;
         return view('status.index', $data);
     }
 
@@ -55,7 +82,7 @@ class OrdersController extends Controller
             $item = new OrderItem;
             $item->menu_id = $menu_id;
             $item->qty = $qty;
-            $item->order_item_status = 'PENDING';
+            $item->order_item_status = 'MENUNGGU';
             $item->order_id = $order->id;
             $item->save();
             // $order->orderItems()->save($item);
@@ -63,5 +90,55 @@ class OrdersController extends Controller
 
         return redirect()->action('OrdersController@status_index');
         // return $request->all();
+    }
+
+    public function accept_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'DITERIMA';
+        $order_item->save();
+
+        return redirect()->action('OrdersController@status_index');
+    }
+
+    public function pay_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'LUNAS';
+        $order_item->save();
+
+        return redirect()->action('OrdersController@status_index');
+    }
+
+    public function ask_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'MOHON TUKAR';
+        $order_item->save();
+
+        return redirect()->action('OrdersController@status_index');
+    }
+
+    public function close_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'DITUKARKAN';
+        $order_item->save();
+
+        return redirect()->action('OrdersController@status_index');
+    }
+
+    public function cancel_order(Request $request)
+    {
+        $order_item_id = $request['order_item_id'];
+        $order_item = OrderItem::find($order_item_id);
+        $order_item->order_item_status = 'DIBATALKAN';
+        $order_item->save();
+
+        return redirect()->action('OrdersController@status_index');
     }
 }
