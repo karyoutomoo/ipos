@@ -59,37 +59,47 @@
     </table>
   </div>
 
-  <!-- Modal -->
-  <div id="add-review" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <form class="modal-content form" method="POST" action="{{ action('ReviewsController@store') }}">
-        {{ csrf_field() }}
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Beri ulasan</h4>
-        </div>
-        <div class="modal-body">
-          <div id="menu-selected"></div>
-          <div id="store-selected"></div>
-          <input id="menu-selected-id" type="hidden" name="menu">
-          <div class="form-group">
-            <label for="rating">Nilai</label>
-            <input id="rating" type="number" min="1" max="5" name="rating" placeholder="Nilai" required>
-          </div>
-          <div class="form-group">
-            <label for="content">Ulasan</label>
-            <textarea id="content" name="content" placeholder="Ulasan"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
-            <button type="submit" class="btn btn-primary">Ulas</button>
-          </form>
-        </div>
+<!-- Modal -->
+<div id="add-review" class="modal fade" role="dialog">
+<div class="modal-dialog">
+  <!-- Modal content-->
+  <form name="form_ulas" class="modal-content form-horizontal" method="POST" action="{{ action('ReviewsController@store') }}">
+    {{ csrf_field() }}
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Beri Rating</h4>
     </div>
-  </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <h3><div align="center" id="menu-selected"></div></h3>
+        <div align="center" id="store-selected"></div>
+        <input id="menu-selected-id" type="hidden" name="menu">
+      </div>
+
+      <div class="form-group" align="center">
+        <button id="btn_rating_1" type="button" class="btn btn-default">1</button>
+        <button id="btn_rating_2" type="button" class="btn btn-default">2</button>
+        <button id="btn_rating_3" type="button" class="btn btn-default">3</button>
+        <button id="btn_rating_4" type="button" class="btn btn-default">4</button>
+        <button id="btn_rating_5" type="button" class="btn btn-default">5</button>
+        <input id="rating" type="hidden" name="rating">
+      </div>
+
+      <div class="form-group">
+          <div class="col-sm-12">
+            <textarea class="form-control" rows="5" id="content" name="content" placeholder="Tuliskan ulasan Anda ..."></textarea>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
+      <button type="submit" class="btn btn-success">Kirim</button>
+    </div>
+  </form>
+</div>
+</div>
 @endsection
 
 @section('js')
@@ -103,4 +113,31 @@
       }
     })
   </script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+        function nilai1() {
+            document.form_ulas.rating.value = '1';
+        }
+        function nilai2() {
+            document.form_ulas.rating.value = '2';
+        }
+        function nilai3() {
+            document.form_ulas.rating.value = '3';
+        }
+        function nilai4() {
+            document.form_ulas.rating.value = '4';
+        }
+        function nilai5() {
+            document.form_ulas.rating.value = '5';
+        }
+
+        $('#btn_rating_1').click(nilai1);
+        $('#btn_rating_2').click(nilai2);
+        $('#btn_rating_3').click(nilai3);
+        $('#btn_rating_4').click(nilai4);
+        $('#btn_rating_5').click(nilai5);
+    });
+  </script>
+
 @endsection
