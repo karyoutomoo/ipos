@@ -45,13 +45,13 @@
                     <button class="btn btn-warning">Habis</button>
                   @endif
 
-                  @if ($user_role)
+                  @if ($user_role && $user_store == $makanan->store_id)
                     <button type="submit" class="btn btn-default">Ganti</button>
                   @endif
                 </form>
               </p>
             </div>
-            @if ($user_role)
+            @if ($user_role && $user_store == $makanan->store_id)
             <div>
               <a href="{{url('/makanan/edit/'.$makanan->id)}}" role="button" class="btn btn-primary">Edit Makanan</a>
             </div>
@@ -73,14 +73,4 @@
       Belum ada Makanan
     </div>
   @endif
-{{--   
-  Soto Ayam Lamongan Bu Kana
-    Telah berdiri sejak 1983, Soto ayam bu Kana telah setia melayani civitas akademika dan terjamin kualitas rasanya
-  Teh Poci Bu Wahyu
-    Teh Poci Bu Wahyu: Sehat, Menyegarkan!
-  Dream Waffle (Mbak Sri)
-    Waffle murah enak mengenyangkan. Terdapat banyak rasa: Cokelat, Keju, Susu, Vanilla, Blueberry.
-  Hayaku Sushi
-    Irrashaimase! Hayaku Sushi wa daisuki! Hayaku Sushi wa oishiiii desuyo! murah meriah enak
---}}
 @endsection

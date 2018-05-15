@@ -12,15 +12,15 @@
 
 @section('content')
   <div>
-    Status Pemesanan:
+    Pemesanan Atas Nama: {{$user_name}}
     <table class="table">
       <thead>
         <tr>
-          <th>Nomor Pemesanan</th>
-          <th>Item</th>
-          <th>Qty</th>
+          <th>No.</th>
+          <th>Pesanan</th>
+          <th>Jumlah</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -31,48 +31,26 @@
             <td>{{ $item->qty }}</td>
             <td>{{ $item->order_item_status }}</td>
             <td>
-            @if ($user_role == 0)
-              @if ($item->order_item_status == "MENUNGGU")
-                <form method="POST" action="{{url('/pemesanan/status/cancel')}}">
-                  {{csrf_field()}}
-                  <input type="hidden" name="order_item_id" value="{{$item->order_id}}">
-                  <button type="submit" class="btn btn-danger">Batalkan</button>
-                </form>
-              @elseif($item->order_item_status == "LUNAS")
-                <form method="POST" action="{{url('/pemesanan/status/ask')}}">
-                  {{csrf_field()}}
-                  <input type="hidden" name="order_item_id" value="{{$item->order_id}}">
-                  <button type="submit" class="btn btn-default">Minta Tukar</button>
-                </form>
-              @else
-                ----
-              @endif
-            @elseif ($user_role == 1)
-              @if ($item->order_item_status == "MENUNGGU")
-                <form method="POST" action="{{url('/pemesanan/status/accept')}}">
-                  {{csrf_field()}}
-                  <input type="hidden" name="order_item_id" value="{{$item->order_id}}">
-                  <button type="submit" class="btn btn-default">Terima</button>
-                </form>
-              @elseif($item->order_item_status == "MOHON TUKAR")
-                <form method="POST" action="{{url('/pemesanan/status/close')}}">
-                  {{csrf_field()}}
-                  <input type="hidden" name="order_item_id" value="{{$item->order_id}}">
-                  <button type="submit" class="btn btn-default">Tukarkan</button>
-                </form>
-              @else
-                ----
-              @endif
-            @elseif($user_role == 2)
-              @if ($item->order_item_status == "DITERIMA")
-                <form method="POST" action="{{url('/pemesanan/status/pay')}}">
-                  {{csrf_field()}}
-                  <input type="hidden" name="order_item_id" value="{{$item->order_id}}">
-                  <button type="submit" class="btn btn-default">Lunasi</button>
-                </form>
-              @else
-                ----
-              @endif
+            @if ($item->order_item_status == "MENUNGGU")
+              <form method="POST" action="{{url('/pemesanan/status/cancel')}}">
+                {{csrf_field()}}
+                <input type="hidden" name="order_item_id" value="{{$item->id}}">
+                <button type="submit" class="btn btn-danger">Batalkan</button>
+              </form>
+            @elseif($item->order_item_status == "LUNAS")
+              <form method="POST" action="{{url('/pemesanan/status/ask')}}">
+                {{csrf_field()}}
+                <input type="hidden" name="order_item_id" value="{{$item->id}}">
+                <button type="submit" class="btn btn-default">Minta Tukar</button>
+              </form>
+            @elseif($item->order_item_status == "DITERIMA")
+              Pesanan diterima, Silahkan lunasi pesanan di kasir
+            @elseif($item->order_item_status == "MOHON TUKAR")
+              Pesanan sudah dapat ditukarkan, Silahkan tukarkan dengan hidangan
+            @elseif($item->order_item_status == "SUDAH DITUKARKAN")
+              Pesanan Selesai
+            @elseif($item->order_item_status == "DIBATALKAN")
+              Pesanan Dibatalkan
             @endif
             </td>
           </tr>

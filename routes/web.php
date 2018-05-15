@@ -58,11 +58,13 @@ Route::prefix('pemesanan')->group(function(){
   Route::post('status/ask', 'OrdersController@ask_order');
   Route::post('status/cancel', 'OrdersController@cancel_order');
   Route::middleware('cekkasir')->group(function(){
-    Route::post('status/pay', 'OrdersController@pay_order');
+    Route::get('kasir', 'OrdersController@cashier_index');
+    Route::post('kasir/pay', 'OrdersController@pay_order');
   });
   Route::middleware('cekpenjual')->group(function(){
-    Route::post('status/accept', 'OrdersController@accept_order');
-    Route::post('status/close', 'OrdersController@close_order');
+    Route::get('toko', 'OrdersController@seller_index');
+    Route::post('toko/accept', 'OrdersController@accept_order');
+    Route::post('toko/close', 'OrdersController@close_order');
   });
 });
 

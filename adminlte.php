@@ -131,7 +131,7 @@ return [
             'icon'        => 'bank',
         ],
         [
-            'text'        => 'Status',
+            'text'        => 'Status Pemesanan',
             'url'         => 'pemesanan/status',
             'icon'        => 'file',
         ],
@@ -141,7 +141,7 @@ return [
             'icon'        => 'pencil',
         ],
         [
-            'text'        => 'Makanan',
+            'text'        => 'Menu',
             'url'         => 'makanan',
             'icon'        => 'group',
         ],
@@ -149,6 +149,16 @@ return [
             'text'        => 'Toko',
             'url'         => 'toko',
             'icon'        => 'briefcase',
+        ],
+        [
+            'text'        => 'Pesanan Toko',
+            'url'         => 'pemesanan/toko',
+            'icon'        => 'balance-scale',
+        ],
+        [
+            'text'        => 'Kasir',
+            'url'         => 'pemesanan/kasir',
+            'icon'        => 'bank',
         ],
         'ACCOUNT SETTINGS',
         [

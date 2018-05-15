@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Menu;
 use App\Order;
 use App\OrderItem;
+use App\Store;
 use DB;
 
 class OrdersController extends Controller
@@ -35,38 +36,45 @@ class OrdersController extends Controller
         $toko_id = Auth::user()->toko_id;
         $role = Auth::user()->user_role;
 
-        if ($role == 0) {
-            $data['orders'] = DB::table('orders')
-                ->join('users','orders.user_id','=','users.id')
-                ->join('order_items', 'orders.id','=','order_items.order_id')
-                ->join('menus', 'menus.id','=','order_items.menu_id')
-                ->select('users.id','users.user_name', 'order_items.*', 'menus.*')
-                ->where('users.id', $user_id)
-                ->orderBy('order_items.order_id', 'DESC')
-                ->get();
-        } else if ($role == 1) {
-            $data['orders'] = DB::table('orders')
-                ->join('users','orders.user_id','=','users.id')
-                ->join('order_items', 'orders.id','=','order_items.order_id')
-                ->join('menus', 'menus.id','=','order_items.menu_id')
-                ->select('users.user_name', 'order_items.*', 'menus.*')
-                ->where('menus.store_id', $toko_id)
-                ->orderBy('order_items.order_id', 'DESC')
-                ->get();
-        } else if ($role == 2){
-            $data['orders'] = DB::table('orders')
-                ->join('users','orders.user_id','=','users.id')
-                ->join('order_items', 'orders.id','=','order_items.order_id')
-                ->join('menus', 'menus.id','=','order_items.menu_id')
-                ->select('users.user_name', 'order_items.*', 'menus.*')
-                ->where('order_items.order_item_status', "DITERIMA")
-                ->orWhere('order_items.order_item_status', "LUNAS")
-                ->orderBy('order_items.order_id', 'DESC')
-                ->get();            
-        }
+        $data['orders'] = DB::table('orders')
+            ->join('users','orders.user_id','=','users.id')
+            ->join('order_items', 'orders.id','=','order_items.order_id')
+            ->join('menus', 'menus.id','=','order_items.menu_id')
+            ->select('users.id','users.user_name', 'order_items.*', 'menus.menu_name')
+            ->where('users.id', '=', $user_id)
+            ->orderBy('order_items.order_id', 'DESC')
+            ->get();
 
+        $data['user_name'] = Auth::user()->user_name;
         $data['user_role'] = $role;
         return view('status.index', $data);
+    }
+
+    public function seller_index(){
+        $toko_id = Auth::user()->toko_id;
+        $data['store_name'] = Store::find($toko_id)->store_name;
+        $data['items'] = DB::table('orders')
+            ->join('users', 'users.id','=','orders.user_id')
+            ->join('order_items', 'orders.id','=','order_items.order_id')
+            ->join('menus', 'menus.id','=','order_items.menu_id')
+            ->select('users.user_name', 'order_items.*', 'menus.menu_name')
+            ->where('menus.store_id', '=', $toko_id)
+            ->orderBy('order_items.order_id', 'DESC')
+            ->get();
+
+        return view('status.seller', $data);
+    }
+
+    public function cashier_index(){
+        $data['items'] = DB::table('orders')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->join('order_items', 'orders.id','=','order_items.order_id')
+            ->join('menus', 'menus.id','=','order_items.menu_id')
+            ->select('users.user_name', 'order_items.*', 'menus.menu_name')
+            ->orderBy('order_items.order_id', 'DESC')
+            ->orderBy('order_items.order_item_status')
+            ->get();
+        return view('status.cashier', $data);
     }
 
     /**
@@ -99,7 +107,7 @@ class OrdersController extends Controller
         $order_item->order_item_status = 'DITERIMA';
         $order_item->save();
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect('pemesanan/toko');
     }
 
     public function pay_order(Request $request)
@@ -109,7 +117,7 @@ class OrdersController extends Controller
         $order_item->order_item_status = 'LUNAS';
         $order_item->save();
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect('pemesanan/kasir');
     }
 
     public function ask_order(Request $request)
@@ -119,17 +127,17 @@ class OrdersController extends Controller
         $order_item->order_item_status = 'MOHON TUKAR';
         $order_item->save();
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect('pemesanan/status');
     }
 
     public function close_order(Request $request)
     {
         $order_item_id = $request['order_item_id'];
         $order_item = OrderItem::find($order_item_id);
-        $order_item->order_item_status = 'DITUKARKAN';
+        $order_item->order_item_status = 'SUDAH DITUKARKAN';
         $order_item->save();
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect('pemesanan/toko');
     }
 
     public function cancel_order(Request $request)
@@ -139,6 +147,7 @@ class OrdersController extends Controller
         $order_item->order_item_status = 'DIBATALKAN';
         $order_item->save();
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect('pemesanan/status');
     }
+
 }

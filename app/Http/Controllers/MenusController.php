@@ -25,6 +25,7 @@ class MenusController extends Controller
       ->select('menus.*', 'stores.store_name')
       ->get();
     $data['user_role'] = (Auth::user()->user_role == 1);
+    $data['user_store'] = Auth::user()->toko_id;
     return view('menu.index', $data);
   }
 
