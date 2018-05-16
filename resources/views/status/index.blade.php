@@ -73,7 +73,7 @@
 
       <div class="modal-body">
         <h4>Apakah Anda ingin membatalkan pemesanan berikut?</h4>
-        
+
       </div>
     
       <div class="modal-footer">
@@ -85,13 +85,4 @@
     </form>
   </div>
 </div>
-
-<script type="text/javascript">
-function batalkan() {
-  var id = document.getElementById("oi_id");
-
-  alert(id.innerHTML);
-  document.getElementById("order_item_id").innerHTML = id.innerHTML;
-}
-</script>
 @endsection
