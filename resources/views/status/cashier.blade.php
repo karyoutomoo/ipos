@@ -38,7 +38,7 @@
                 <form method="POST" action="{{url('/pemesanan/kasir/pay')}}">
                   {{csrf_field()}}  
                   <input type="hidden" name="order_item_id" value="{{$item->id}}">
-                  <button type="submit" class="btn btn-default">Lunasi</button>  
+                  <button type="submit" class="btn btn-success">Lunasi</button>  
                 </form>
               @elseif($item->order_item_status == "LUNAS")
                 Pesanan Siap Ditukarkan
