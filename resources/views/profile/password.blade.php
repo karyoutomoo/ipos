@@ -8,7 +8,7 @@
 
 @section('content')
   <div>
-    <form method="POST" action="{{url('/password')}}" class="form-horizontal">
+    <form method="POST" action="{{url('/profile/password')}}" class="form-horizontal">
       {{csrf_field()}}
       <div class="form-group">
         <label class="control-label col-sm-2">Old Password</label>
