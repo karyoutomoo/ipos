@@ -139,6 +139,11 @@ return [
                     'icon'        => 'coffee',
                 ],
                 [
+                    'text'        => 'Daftarkan Menu',
+                    'url'         => 'makanan/buat',
+                    'icon'        => 'pencil',
+                ],
+                [
                     'text'        => 'Ulasan',
                     'url'         => 'ulasan',
                     'icon'        => 'thumbs-up',

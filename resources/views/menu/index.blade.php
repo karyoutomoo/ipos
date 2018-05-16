@@ -3,18 +3,18 @@
 @section('title', 'IPOS - Food')
 
 @section('content_header')
-  <h1>Daftar Makanan</h1>
+  <h1>Daftar Menu</h1>
 @endsection
 
 @section('content')
   <p>
     {{-- Silahkan lakukan pemesanan di halaman berikut:  --}}
-    <a href="{{url('pemesanan')}}" class="btn btn-primary">Pesan Makanan</a>
+    <a href="{{url('pemesanan')}}" class="btn btn-primary">Pesan Menu</a>
   </p>  
   @if ($user_role)
   <p>
     {{-- Anda Dapat mendaftarkan makanan outlet anda di halaman berikut: --}}
-    <a href="{{url('/makanan/buat')}}" class="btn btn-primary">Buat Makanan</a>
+    <a href="{{url('/makanan/buat')}}" class="btn btn-primary">Daftarkan Menu</a>
   </p>
   @endif
   @if ($makanans->count())
