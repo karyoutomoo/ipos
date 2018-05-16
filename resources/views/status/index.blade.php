@@ -3,7 +3,11 @@
 @section('title', 'IPOS - Status')
 
 @section('css')
-  {{-- expr --}}
+  <style type="text/css">
+    .new {
+      background: white;
+    }
+  </style>
 @endsection
 
 @section('content_header')
@@ -25,15 +29,14 @@
       </thead>
       <tbody>
         @foreach ($orders as $item)
-          <tr>
+          <tr class="{{ (($last_order_id == $item->order_id)) ? 'new' : ''}}">
             <td>{{ $item->order_id }}</td>
             <td>{{ $item->menu_name }}</td>
             <td>{{ $item->qty }}</td>
             <td>{{ $item->order_item_status }}</td>
             <td>
             @if ($item->order_item_status == "MENUNGGU")
-              <input type="hidden" name="oi_id" value="{{$item->id}}">
-              <button id="cancelButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel-confirmation" onclick="batalkan()">Batalkan</button>
+              <button id="cancelButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel-confirmation" onclick="batalkan('{{$item->id}}')">Batalkan</button>
             @elseif($item->order_item_status == "LUNAS")
               <form method="POST" action="{{url('/pemesanan/status/ask')}}">
                 {{csrf_field()}}
@@ -69,12 +72,12 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Konfirmasi Pembatalan</h4>
       </div>
-      <input type="hidden" name="order_item_id">
 
       <div class="modal-body">
         <h4>Apakah Anda ingin membatalkan pemesanan berikut?</h4>
-
       </div>
+
+      <div id="order-form"></div>
     
       <div class="modal-footer">
         <div align="center">
@@ -85,4 +88,16 @@
     </form>
   </div>
 </div>
+@endsection
+
+@section('js')
+  <script type="text/javascript">
+    function batalkan(item_id){
+      var form = document.getElementById('order-form');
+
+      form.innerHTML = 
+      '<input type="hidden" name="order_item_id" value="' + item_id + '">';
+    }
+    
+  </script>
 @endsection

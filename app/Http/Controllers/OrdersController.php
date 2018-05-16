@@ -31,7 +31,7 @@ class OrdersController extends Controller
     /**
      *  Status page
      */
-    public function status_index(){
+    public function status_index(Request $request){
         $user_id = Auth::user()->id;
         $toko_id = Auth::user()->toko_id;
         $role = Auth::user()->user_role;
@@ -47,6 +47,11 @@ class OrdersController extends Controller
 
         $data['user_name'] = Auth::user()->user_name;
         $data['user_role'] = $role;
+        if ($request->query('is_redirect')) {
+            $data['last_order_id'] = $data['orders']->first()->order_id;
+        } else {
+            $data['last_order_id'] = '0';
+        }
         return view('status.index', $data);
     }
 
@@ -97,7 +102,7 @@ class OrdersController extends Controller
             // $order->orderItems()->save($item);
         }
 
-        return redirect()->action('OrdersController@status_index');
+        return redirect()->action('OrdersController@status_index', ['is_redirect' => true]);
         // return $request->all();
     }
 

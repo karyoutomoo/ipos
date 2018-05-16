@@ -78,7 +78,7 @@
 
         <div class="modal-footer">
           <div align="center">
-            <button type="button" class="btn btn-default">Batal</button>
+            <button type="button" class="btn btn-default">Kembali</button>
             <button type="submit" class="btn btn-danger">Tolak Pesanan</button>
           </div>
         </div>
@@ -90,9 +90,6 @@
 @section('js')
   <script type="text/javascript">
     function cancel(order_item_id, order_id, user_name, menu_name, qty, status){
-      console.log(order_item_id);
-      console.log(order_id);
-
       var table = document.getElementById('order-table');
       var form = document.getElementById('order-form');
 
