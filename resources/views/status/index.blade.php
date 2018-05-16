@@ -32,11 +32,8 @@
             <td>{{ $item->order_item_status }}</td>
             <td>
             @if ($item->order_item_status == "MENUNGGU")
-              <form method="POST" action="{{url('/pemesanan/status/cancel')}}">
-                {{csrf_field()}}
-                <input type="hidden" name="order_item_id" value="{{$item->id}}">
-                <button type="submit" class="btn btn-danger">Batalkan</button>
-              </form>
+              <input type="hidden" name="oi_id" value="{{$item->id}}">
+              <button id="cancelButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel-confirmation" onclick="batalkan()">Batalkan</button>
             @elseif($item->order_item_status == "LUNAS")
               <form method="POST" action="{{url('/pemesanan/status/ask')}}">
                 {{csrf_field()}}
@@ -60,4 +57,41 @@
       </tbody>
     </table>
   </div>
+
+
+<!-- Modal -->
+<div id="cancel-confirmation" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <form class="modal-content" method="POST" action="{{url('/pemesanan/status/cancel')}}">
+      {{ csrf_field() }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Konfirmasi Pembatalan</h4>
+      </div>
+      <input type="hidden" name="order_item_id">
+
+      <div class="modal-body">
+        <h4>Apakah Anda ingin membatalkan pemesanan berikut?</h4>
+        
+      </div>
+    
+      <div class="modal-footer">
+        <div align="center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+          <button type="submit" class="btn btn-danger">Batalkan</button>
+        </div>  
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+function batalkan() {
+  var id = document.getElementById("oi_id");
+
+  alert(id.innerHTML);
+  document.getElementById("order_item_id").innerHTML = id.innerHTML;
+}
+</script>
 @endsection

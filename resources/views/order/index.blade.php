@@ -7,6 +7,12 @@
 @endsection
 
 @section('content')
+
+<link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.css">
+    <!-- put first the jquery path, otherwise the bootstrap.js won't work-->
+    <script src="js/jquery/jquery-3.1.0.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+
 <h4>Makanan</h4>
 <div class="row">
   @foreach ($foods as $food)
@@ -68,7 +74,7 @@
                 <button class="btn btn-default" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',false)"><b>-</b></button>
               </span>
 
-              <input type="number" min="0" class="qty form-control" placeholder="0" id="{{'amountfood'.$beverage->menu_name}}" readonly>
+              <input type="text" min="0" class="qty form-control" placeholder="0" id="{{'amountfood'.$beverage->menu_name}}" readonly>
 
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="button" onclick="change('{{'amountfood'.$beverage->menu_name}}',true)"><b>+</b></button>
@@ -194,7 +200,7 @@
         }
       });
 
-      document.getElementById('total').innerHTML = ('Rp' + total + '.00');
+      document.getElementById('total').innerHTML = ('Rp' + total + '.00');      
     }
   </script>
 @endsection
