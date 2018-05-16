@@ -28,8 +28,8 @@
       <div class="form-group">
         <label class="control-label col-sm-2">Jenis</label>
         <div class="col-sm-6">
-          <label class="radio-inline"><input type="radio" name="tipe_menu" value="1">Makanan</label>
-          <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Minuman</label>
+          <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Makanan</label>
+          <label class="radio-inline"><input type="radio" name="tipe_menu" value="1">Minuman</label>
         </div>
       </div>
 
