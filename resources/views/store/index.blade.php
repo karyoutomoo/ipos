@@ -76,7 +76,7 @@
     </table>
   </div>
 
-    @if ($seller_id == $t->id)
+    @if ($seller_id)
     <p>
       <a href="{{url('/toko/edit/'.$t->id)}}" role="button" class="btn btn-default">Edit Toko</a>
       <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#delete_confirmation" onclick="deleteStore('{{$t->id}}','{{$t->store_name}}','{{$t->store_location}}')">Hapus Toko</button>

@@ -61,11 +61,17 @@ class StoresController extends Controller
     }
 
     public function edit_index($store_id){
+      if(Auth::user()->toko_id != $store_id){
+        return redirect('403');
+      }
       $data['toko'] = Store::find($store_id);
       return view('store.edit', $data);
     }
 
     public function edit(Request $request, $store_id){
+      if(Auth::user()->toko_id != $store_id){
+        return redirect('403');
+      }
       $toko = Store::find($store_id);
       $toko->store_name = $request['nama_toko'];
       $toko->store_location = $request['lokasi'];

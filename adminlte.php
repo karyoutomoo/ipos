@@ -167,6 +167,11 @@ return [
             'icon'        => 'bank',
             'can'         => 'is_cashier',
         ],
+        [
+            'text'        => 'Tutorial',
+            'url'         => 'home',
+            'icon'        => 'book',
+        ],
         'PENGATURAN AKUN',
         [
             'text' => 'Profil',
