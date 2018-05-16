@@ -97,7 +97,7 @@
       </h3>
        --}}
       <div class="form-group">
-        <button id="orderButton" type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#order-confirmation" onclick="order()">Pesan</button>
+        <button id="orderButton" type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#order-confirmation" onclick="order()" disabled>Pesan</button>
       </div>
     </p>
   </div>
@@ -162,15 +162,24 @@
 @section('js')
   <script type="text/javascript">
     // to do: disable button when not ordering
+    var item_selected = 0;
     
     function change(id, isPlus){
       var e = document.getElementById(id);
       if (isPlus){
         e.value = +e.value+1;
+        item_selected++;
       } else if(e.value > 0){
         e.value = +e.value-1;
+        item_selected--;
       } else {
         e.value = +0;
+      }
+
+      if (item_selected > 0) {
+        document.getElementById('orderButton').disabled = false;
+      } else {
+        document.getElementById('orderButton').disabled = true;
       }
     }
 
