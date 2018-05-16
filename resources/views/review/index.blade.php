@@ -110,26 +110,50 @@
         document.getElementById('menu-selected-id').value = this.dataset.menuId;
         document.getElementById('menu-selected').innerHTML = this.dataset.menuName;
         document.getElementById('store-selected').innerHTML = this.dataset.storeName;
+        changeRating(0);
+        document.getElementById('content').value = "";
       }
     })
   </script>
 
   <script type="text/javascript">
+    var active_rating = 0;
+
+    function changeRating(rating) {
+      if (active_rating > 0) {
+        var e = document.getElementById('btn_rating_' + active_rating);
+        e.classList.remove('btn-success');
+        e.classList.add('btn-default');
+      }
+
+      if (rating > 0) {
+        var e = document.getElementById('btn_rating_' + rating);
+        e.classList.remove('btn-default');
+        e.classList.add('btn-success');
+        active_rating = rating;
+      }
+    }
+
     $(document).ready( function() {
         function nilai1() {
             document.form_ulas.rating.value = '1';
+            changeRating(1);
         }
         function nilai2() {
             document.form_ulas.rating.value = '2';
+            changeRating(2);
         }
         function nilai3() {
             document.form_ulas.rating.value = '3';
+            changeRating(3);
         }
         function nilai4() {
             document.form_ulas.rating.value = '4';
+            changeRating(4);
         }
         function nilai5() {
             document.form_ulas.rating.value = '5';
+            changeRating(5);
         }
 
         $('#btn_rating_1').click(nilai1);
