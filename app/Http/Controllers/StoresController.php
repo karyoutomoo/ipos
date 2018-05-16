@@ -32,6 +32,10 @@ class StoresController extends Controller
       $toko->store_location = $request['lokasi'];
       $toko->save();
 
+      $user = Auth::user();
+      $user->toko_id = $toko->id;
+      $user->save();
+
       return redirect('toko')->with('status', 'Berhasil membuat toko baru');
     }
 

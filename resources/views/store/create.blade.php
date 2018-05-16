@@ -12,13 +12,13 @@
     <div class="form-group">
       <label class="control-label col-sm-2">Nama Toko</label>
       <div class="col-sm-4">
-        <input class="form-control" type="text" name="nama_toko" placeholder="Nama Toko">
+        <input class="form-control" type="text" name="nama_toko" placeholder="Nama Toko" required>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Lokasi Toko</label>
       <div class="col-sm-6">
-        <textarea class="form-control" rows="5" name="lokasi" placeholder="Lokasi Toko dan keterangan lainnya dapat disertakan di sini"></textarea>
+        <textarea class="form-control" rows="5" name="lokasi" placeholder="Lokasi Toko dan keterangan lainnya dapat disertakan di sini" required></textarea>
       </div>
     </div>
     <div class="form-group">

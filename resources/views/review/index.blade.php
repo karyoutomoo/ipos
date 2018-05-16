@@ -44,6 +44,7 @@
           <th>Toko</th>
           <th>Nilai</th>
           <th>Ulasan</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,10 @@
             <td>{{ $review->menu->store->store_name }}</td>
             <td>{{ $review->rating }}</td>
             <td>{{ $review->content }}</td>
+            <td>
+              <a href="{{url('/ulasan')}}" class="btn btn-default" role="button">Edit Ulasan</a>
+              <a href="{{url('/ulasan')}}" class="btn btn-danger" role="button">Hapus Ulasan</a>
+            </td>
           </tr>
         @endforeach
       </tbody>
@@ -74,7 +79,7 @@
       <div class="form-group">
         <h3><div align="center" id="menu-selected"></div></h3>
         <div align="center" id="store-selected"></div>
-        <input id="menu-selected-id" type="hidden" name="menu">
+        <input id="menu-selected-id" type="hidden" name="menu" required>
       </div>
 
       <div class="form-group" align="center">
@@ -83,12 +88,12 @@
         <button id="btn_rating_3" type="button" class="btn btn-default">3</button>
         <button id="btn_rating_4" type="button" class="btn btn-default">4</button>
         <button id="btn_rating_5" type="button" class="btn btn-default">5</button>
-        <input id="rating" type="hidden" name="rating">
+        <input id="rating" type="hidden" name="rating" required>
       </div>
 
       <div class="form-group">
           <div class="col-sm-12">
-            <textarea class="form-control" rows="5" id="content" name="content" placeholder="Tuliskan ulasan Anda ..."></textarea>
+            <textarea class="form-control" rows="5" id="content" name="content" placeholder="Tuliskan ulasan Anda ..." required></textarea>
           </div>
       </div>
     </div>

@@ -14,35 +14,35 @@
       <div class="form-group">
         <label class="control-label col-sm-2">Nama Menu</label>
         <div class="col-sm-4">
-          <input class="form-control" type="text" name="nama_makanan" placeholder="Nama Menu">
+          <input class="form-control" type="text" name="nama_makanan" placeholder="Nama Menu" required>
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-sm-2">Harga (Rp)</label>
         <div class="col-sm-4">
-          <input class="form-control" type="number" name="harga" placeholder="Harga Menu">
+          <input class="form-control" type="number" min="0" name="harga" placeholder="Harga Menu" required>
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-sm-2">Jenis</label>
         <div class="col-sm-6">
-          <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Makanan</label>
-          <label class="radio-inline"><input type="radio" name="tipe_menu" value="1">Minuman</label>
+          <label class="radio-inline"><input type="radio" name="tipe_menu" value="0" required>Makanan</label>
+          <label class="radio-inline"><input type="radio" name="tipe_menu" value="1" required>Minuman</label>
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-sm-2">Deskripsi</label>
         <div class="col-sm-6">
-          <textarea class="form-control" rows="5" name="deskripsi" placeholder="Deskripsikan menu semenarik mungkin"></textarea>
+          <textarea class="form-control" rows="5" name="deskripsi" placeholder="Deskripsikan menu semenarik mungkin" required></textarea>
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2">Gambar</label>
         <div class="col-sm-4">
-          <input type="file" name="gambar_makanan">
+          <input type="file" name="gambar_makanan" required>
         </div>
       </div>
       <div class="form-group">

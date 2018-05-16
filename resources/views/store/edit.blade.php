@@ -8,16 +8,18 @@
 
 @section('content')
   <form class="form-horizontal" method="POST" action="{{url('toko/edit/'.$toko->id)}}">
+    {{csrf_field()}}
+    <input type="hidden" name="_method" value="PUT"> 
     <div class="form-group">
       <label class="control-label col-sm-2">Nama Toko</label>
       <div class="col-sm-4">
-        <input class="form-control" type="text" name="nama_toko" placeholder="Nama Toko" value="{{$toko->store_name}}">
+        <input class="form-control" type="text" name="nama_toko" placeholder="Nama Toko" value="{{$toko->store_name}}" required>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Lokasi Toko</label>
       <div class="col-sm-6">
-        <textarea class="form-control" rows="5" name="lokasi" placeholder="Lokasi Toko dan keterangan lainnya dapat disertakan di sini">{{$toko->store_location}}</textarea>
+        <textarea class="form-control" rows="5" name="lokasi" placeholder="Lokasi Toko dan keterangan lainnya dapat disertakan di sini" required>{{$toko->store_location}}</textarea>
       </div>
     </div>
     <div class="form-group">

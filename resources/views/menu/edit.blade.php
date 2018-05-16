@@ -14,14 +14,14 @@
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right">Nama Menu</label>
         <div class="col-sm-4">
-          <input class="form-control" type="text" name="nama_makanan" placeholder="Nama Menu" value="{{$menu->menu_name}}">
+          <input class="form-control" type="text" name="nama_makanan" placeholder="Nama Menu" value="{{$menu->menu_name}}" required>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right">Harga (Rp)</label>
         <div class="col-sm-4">
-          <input class="form-control" type="number" name="harga" placeholder="Harga Menu" value="{{$menu->menu_price}}">
+          <input class="form-control" type="number" name="harga" placeholder="Harga Menu" value="{{$menu->menu_price}}" required>
         </div>
       </div>
 
@@ -29,11 +29,11 @@
         <label class="control-label col-sm-2 text-right">Jenis</label>
         <div class="col-sm-6">
           @if ($menu->menu_type)
-            <label class="radio-inline"><input type="radio" name="tipe_menu" value="0">Makanan</label>
-            <label class="radio-inline"><input type="radio" name="tipe_menu" value="1" checked>Minuman</label>
+            <label class="radio-inline"><input type="radio" name="tipe_menu" value="0" required>Makanan</label>
+            <label class="radio-inline"><input type="radio" name="tipe_menu" value="1" checked required>Minuman</label>
           @else
-            <label class="radio-inline"><input type="radio" name="tipe_menu" value="0" checked>Makanan</label>
-            <label class="radio-inline"><input type="radio" name="tipe_menu" value="1">Minuman</label>
+            <label class="radio-inline"><input type="radio" name="tipe_menu" value="0" checked required>Makanan</label>
+            <label class="radio-inline"><input type="radio" name="tipe_menu" value="1" required>Minuman</label>
           @endif
         </div>
       </div>
@@ -41,7 +41,7 @@
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right">Deskripsi</label>
         <div class="col-sm-6">
-          <textarea class="form-control" rows="5" name="deskripsi" placeholder="Deskripsikan menu semenarik mungkin">{{$menu->menu_description}}</textarea>
+          <textarea class="form-control" rows="5" name="deskripsi" placeholder="Deskripsikan menu semenarik mungkin" required>{{$menu->menu_description}}</textarea>
         </div>
       </div>
       <div class="form-group row">
@@ -50,7 +50,7 @@
           Mohon Upload Ulang Gambar
         </strong>
         <div class="col-sm-4">
-          <input type="file" name="gambar_makanan">
+          <input type="file" name="gambar_makanan" required>
         </div>
       </div>
       <div class="form-group row">
