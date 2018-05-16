@@ -7,16 +7,15 @@
 @endsection
 
 @section('content')
-  <p>
+  <div class="form-group">
     {{-- Silahkan lakukan pemesanan di halaman berikut:  --}}
     <a href="{{url('pemesanan')}}" class="btn btn-primary">Pesan Menu</a>
-  </p>  
-  @if ($user_role)
-  <p>
-    {{-- Anda Dapat mendaftarkan makanan outlet anda di halaman berikut: --}}
-    <a href="{{url('/makanan/buat')}}" class="btn btn-primary">Daftarkan Menu</a>
-  </p>
-  @endif
+    @if ($user_role)
+      {{-- Anda Dapat mendaftarkan makanan outlet anda di halaman berikut: --}}
+      <a href="{{url('/makanan/buat')}}" class="btn btn-primary">Daftarkan Menu</a>
+    @endif
+  </div>
+
   @if ($makanans->count())
     <div class="row">
       @foreach ($makanans as $makanan)
@@ -57,7 +56,7 @@
                 <form method="POST" action="{{url('/makanan/toggle/')}}">
                   {{csrf_field()}}
                   <input type="hidden" name="menu_id" value="{{$makanan->id}}">
-                  <h5>
+                  <h4>
                     Status:   
                     <strong>
                       @if ($makanan->menu_status)
@@ -68,12 +67,12 @@
                     </strong>
                     @if ($user_role && $user_store == $makanan->store_id)
                       @if ($makanan->menu_status)
-                        <button type="submit" class="btn btn-danger">Ganti Habis</button>
+                        <button type="submit" class="btn btn-default">Ganti Habis</button>
                       @else
-                        <button type="submit" class="btn btn-success">Ganti Ada</button>
+                        <button type="submit" class="btn btn-default">Ganti Ada</button>
                       @endif
                     @endif
-                  </h5>
+                  </h4>
                 </form>
               </p>
               @if ($user_role && $user_store == $makanan->store_id)

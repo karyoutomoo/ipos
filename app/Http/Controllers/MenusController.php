@@ -64,12 +64,18 @@ class MenusController extends Controller
   }
 
   public function edit_index($menu_id){
+    if(Auth::user()->toko_id != Menu::find($menu_id)->store_id){
+      return redirect('403')->with('Bukan Makanan Toko Anda');
+    }
     $data['toko_id'] = Auth::user()->toko_id;
     $data['menu'] = Menu::find($menu_id);
     return view('menu.edit', $data);
   }
 
   public function edit(Request $request, $menu_id){
+    if(Auth::user()->toko_id != Menu::find($menu_id)->store_id){
+      return redirect('403')->with('Bukan Makanan Toko Anda');
+    }
     $user = Auth::user();
     $Menu = Menu::find($menu_id);
     

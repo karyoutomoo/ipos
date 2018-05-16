@@ -37,13 +37,6 @@ class ReviewsSeeder extends Seeder
 
     Review::create([
       'user_id' => '2',
-      'menu_id' => '5',
-      'rating' => '1',
-      'content' => 'Jeruknya terlalu kecut buat saya..',
-    ]);
-
-    Review::create([
-      'user_id' => '2',
       'menu_id' => '6',
       'rating' => '3',
       'content' => 'Lumayan untuk mengisi perut.. Tapi harganya kemahalan, mending saya beli soto',
