@@ -28,11 +28,15 @@
             <td>{{$t->store_name}}</td>
             <td>{{$t->store_location}}</td>
             <td>
-              @if ($t->store_status)
-                <button class="btn btn-success">Buka</button>
-              @else
-                <button class="btn btn-warning">Tutup</button>
-              @endif
+              <h5>
+                <strong>
+                  @if ($t->store_status)
+                    <div class="text-success">BUKA</div>
+                  @else
+                    <div>TUTUP</div>
+                  @endif
+                </strong>
+              </h5>
             </td>
             @if ($user_role)
             @if ($seller_id == $t->id)
@@ -41,13 +45,15 @@
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="status_toko_id" value="{{$t->id}}"> 
-                  <button type="submit" class="btn btn-default">
-                    @if ($t->store_status)
+                  @if ($t->store_status)
+                    <button type="submit" class="btn btn-danger">
                       Tutup Toko
-                    @else 
+                    </button> 
+                  @else 
+                    <button type="submit" class="btn btn-success">
                       Buka Toko
-                    @endif
-                  </button> 
+                    </button> 
+                  @endif
               </form>
             </td>
             @elseif($seller_id)

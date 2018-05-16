@@ -22,14 +22,20 @@
           <img src="{{asset($food->menu_imagepath)}}" alt="{{ $food->name }}">
         </a>
         <div class="caption">
-          <h5>{{ $food->menu_name }}</h5>
-          <h3>Rp. {{ $food->menu_price }}</h3>
+          <h4>
+            {{ $food->menu_name }}
+          </h4>
+            @if(empty($food->rating()))
+              <p>Belum ada rating</p>
+            @else
+              <p>Rating : 
+                <strong>
+                  {{ number_format($food->rating(), 2) }} / 5.00
+                </strong> 
+              </p>
+            @endif
 
-          @if(empty($food->rating()))
-            <p>Belum ada rating</p>
-          @else
-            <p>Rating {{ number_format($food->rating(), 2) }}</p>
-          @endif
+          <h3>Rp. {{ $food->menu_price }}</h3>
 
           <div class="form-group">
             <div class="input-group">
@@ -59,14 +65,20 @@
           <img src="{{asset($beverage->menu_imagepath)}}" alt="{{ $beverage->name }}">
         </a>
         <div class="caption">
-          <h5>{{ $beverage->menu_name }}</h5>
-          <h3>Rp. {{ $beverage->menu_price }}</h3>
+          <h4>
+            {{ $beverage->menu_name }}
+          </h4>
+            @if(empty($beverage->rating()))
+              <p>Belum ada rating</p>
+            @else
+              <p>Rating : 
+                <strong>
+                  {{ number_format($beverage->rating(), 2) }} / 5.00
+                </strong> 
+              </p>
+            @endif
 
-          @if(empty($beverage->rating()))
-            <p>Belum ada rating</p>
-          @else
-            <p>Rating {{ number_format($beverage->rating(), 2) }}</p>
-          @endif
+          <h3>Rp. {{ $beverage->menu_price }}</h3>
 
           <div class="form-group">
             <div class="input-group">

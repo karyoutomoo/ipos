@@ -20,8 +20,7 @@ class MenusController extends Controller
 
   public function index(){
     // $data['makanans'] = Menu::get();
-    $data['makanans'] = DB::table('menus')
-      ->join('stores', 'menus.store_id','=','stores.id')
+    $data['makanans'] = Menu::join('stores', 'menus.store_id','=','stores.id')
       ->select('menus.*', 'stores.store_name')
       ->get();
     $data['user_role'] = (Auth::user()->user_role == 1);
