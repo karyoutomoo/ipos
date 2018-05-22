@@ -18,8 +18,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $id_user = Auth::user()->id;
-        $data['user'] = User::find($id_user); 
+        $data['user'] = Auth::user(); 
         $toko_user = Auth::user()->toko_id;
         if ($toko_user) {
             $data['store'] = Store::find($toko_user);
@@ -55,7 +54,7 @@ class ProfileController extends Controller
         $user->toko_id = NULL;
         $user->save();
 
-        return redirect('profile')->with('Berhasill meninggalkan toko');
+        return redirect('profile')->with('left', 'Anda berhasil meninggalkan kedai');
     }
 
     /**

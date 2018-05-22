@@ -3,22 +3,21 @@
 @section('title', 'IPOS - Profile')
 
 @section('content_header')
-  <h1>Profile</h1>
+  <h1>Profil</h1>
 @endsection
 
 @section('content')
   <div class="table-responsive">
-    Your profile:
+
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Nama</th>
           <th>Email</th>
-          <th>Role</th>
-          {{-- If penjual, tampilkan toko --}}
-          @if ($user->user_role)
-            <th>Toko</th>
-            <th>Action</th>
+          <th>Peran</th>
+          @if ($user->user_role == 1)
+            <th>Kedai</th>
+            <th>Lainnya</th>
           @endif
         </tr>
       </thead>
@@ -41,8 +40,8 @@
                 Pembeli
             @endswitch
           </td>
-          @if ($user->user_role)
-            @if ($user->toko_id)
+          @if ($user->user_role == 1)
+            @if($user->toko_id)
               <td>
                 {{$store->store_name}}
               </td>
@@ -50,15 +49,15 @@
                 <form method="POST" action="{{url('profile')}}">
                   {{csrf_field()}}
                   <input type="hidden" name="_method" value="PUT">
-                  <button type="submit" class="btn btn-danger">Keluar Toko</button>
+                  <button type="submit" class="btn btn-danger">Tinggalkan Kedai</button>
                 </form>
               </td>
             @else
               <td>
-                Belum ada toko
+                Belum terdaftar pada Kedai manapun.
               </td>
               <td>
-                <a href="{{url('toko')}}" role="button" class="btn btn-primary">Ikut Toko</a>
+                <a href="{{url('toko/daftar')}}" role="button" class="btn btn-primary">Daftar pada Kedai</a>
               </td>
             @endif
           @endif

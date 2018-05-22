@@ -25,8 +25,10 @@ Route::prefix('profile')->group(function(){
 });
 
 Route::prefix('toko')->group(function(){
-  Route::get('/', 'StoresController@index');
+  Route::get('/', function(){return redirect('toko/lihat');});
+  Route::get('/lihat', 'StoresController@index');
   Route::middleware('cekpenjual')->group(function(){
+    Route::get('detail', 'StoresController@detail_index');
     Route::get('buat', 'StoresController@create_index');
     Route::post('buat', 'StoresController@create');
     Route::get('daftar', 'StoresController@register_index');
@@ -35,7 +37,6 @@ Route::prefix('toko')->group(function(){
     Route::put('edit/{store}', 'StoresController@edit');
     Route::delete('delete', 'StoresController@delete');
     Route::put('toggle','StoresController@toggle');
-    Route::put('register', 'StoresController@register_button');
   });
 });
 

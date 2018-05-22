@@ -11,6 +11,7 @@
 @endsection
 
 @section('content')
+  @if ($new_menus->count())
   <div class="table-responsive">
     <h4>Beri ulasan:</h4>
     <table class="table">
@@ -34,7 +35,16 @@
       </tbody>
     </table>
   </div>
+  @else
+  <div>
+    Anda belum pernah melakukan pemesanan. <br>
+    Silahkan lakukan pemesanan di halaman berikut: <a href="{{url('/pemesanan')}}" class="btn btn-primary">Pesan Baru</a>
+  </div>
+  @endif
 
+  <br>
+
+  @if ($reviews->count())
   <div>
     <h4>Ulasanku:</h4>
     <table class="table">
@@ -63,6 +73,11 @@
       </tbody>
     </table>
   </div>
+  @else 
+  <div>
+    Anda belum pernah memberikan ulasan. <br>
+  </div>
+  @endif
 
 <!-- Modal -->
 <div id="add-review" class="modal fade" role="dialog">

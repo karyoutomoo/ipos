@@ -36,8 +36,7 @@ class OrdersController extends Controller
         $toko_id = Auth::user()->toko_id;
         $role = Auth::user()->user_role;
 
-        $data['orders'] = DB::table('orders')
-            ->join('users','orders.user_id','=','users.id')
+        $data['orders'] = Order::join('users','orders.user_id','=','users.id')
             ->join('order_items', 'orders.id','=','order_items.order_id')
             ->join('menus', 'menus.id','=','order_items.menu_id')
             ->select('users.id','users.user_name', 'order_items.*', 'menus.menu_name')
@@ -57,23 +56,26 @@ class OrdersController extends Controller
 
     public function seller_index(){
         $toko_id = Auth::user()->toko_id;
-        $data['store_name'] = Store::find($toko_id)->store_name;
-        $data['items'] = DB::table('orders')
-            ->join('users', 'users.id','=','orders.user_id')
-            ->join('order_items', 'orders.id','=','order_items.order_id')
-            ->join('menus', 'menus.id','=','order_items.menu_id')
-            ->select('users.user_name', 'order_items.*', 'menus.menu_name')
-            ->where('menus.store_id', '=', $toko_id)
-            ->orderBy('order_items.order_id', 'DESC')
-            ->orderBy('order_items.order_item_status')
-            ->get();
+        $data['toko_id'] = $toko_id; 
+        if(empty($toko_id)){
+            return view('status.seller', $data)->withErrors('Anda belum terdaftar pada Kedai manapun.');
+        } else {
+            $data['store_name'] = Store::findOrFail($toko_id)->store_name;
+            $data['items'] = Order::join('users', 'users.id','=','orders.user_id')
+                ->join('order_items', 'orders.id','=','order_items.order_id')
+                ->join('menus', 'menus.id','=','order_items.menu_id')
+                ->select('users.user_name', 'order_items.*', 'menus.menu_name')
+                ->where('menus.store_id', '=', $toko_id)
+                ->orderBy('order_items.order_id', 'DESC')
+                ->orderBy('order_items.order_item_status')
+                ->get();
+        }
 
         return view('status.seller', $data);
     }
 
     public function cashier_index(){
-        $data['items'] = DB::table('orders')
-            ->join('users', 'users.id', '=', 'orders.user_id')
+        $data['items'] = Order::join('users', 'users.id', '=', 'orders.user_id')
             ->join('order_items', 'orders.id','=','order_items.order_id')
             ->join('menus', 'menus.id','=','order_items.menu_id')
             ->select('users.user_name', 'order_items.*', 'menus.menu_name')

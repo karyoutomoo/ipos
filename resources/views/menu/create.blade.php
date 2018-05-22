@@ -21,7 +21,7 @@
       <div class="form-group">
         <label class="control-label col-sm-2">Harga (Rp)</label>
         <div class="col-sm-4">
-          <input class="form-control" type="number" min="0" name="harga" placeholder="Harga Menu" required>
+          <input class="form-control" type="number" min="1000" name="harga" placeholder="Harga Menu" required>
         </div>
       </div>
 
