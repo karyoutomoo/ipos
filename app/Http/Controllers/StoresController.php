@@ -157,4 +157,8 @@ class StoresController extends Controller
       $data['store'] = Store::find(Auth::user()->toko_id);
       return view('store.detail', $data);
     }
+
+    public function redirect_lihat(){
+      return redirect('toko/lihat');
+    }
 }

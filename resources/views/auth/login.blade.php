@@ -11,31 +11,35 @@
 @section('body')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
+            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">IPOS</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Silahkan Masuk Untuk Mulai</p>
+            <p class="login-box-msg">Masuk</p>
             <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
                 {!! csrf_field() !!}
 
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                           placeholder="Email">
+                           placeholder="{{ trans('adminlte::adminlte.email') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
-                            <strong>Email Diperlukan</strong>
+                            @foreach ($errors->get('email') as $error)
+                                <strong>{{ $error }}</strong>
+                            @endforeach
                         </span>
                     @endif
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
-                           placeholder="Password">
+                           placeholder="{{ trans('adminlte::adminlte.password') }}">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">
-                            <strong>Password Diperlukan</strong>
+                            @foreach ($errors->get('password') as $error)
+                                <strong>{{ $error }}</strong>
+                            @endforeach
                         </span>
                     @endif
                 </div>
@@ -43,14 +47,14 @@
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox" name="remember"> Ingat Akun
+                                <input type="checkbox" name="remember"> Ingat Saya
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
                         <button type="submit"
-                                class="btn btn-primary btn-block btn-flat">Masuk</button>
+                                class="btn btn-primary btn-block btn-flat">{{ trans('adminlte::adminlte.sign_in') }}</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -63,7 +67,7 @@
                 @if (config('adminlte.register_url', 'register'))
                     <a href="{{ url(config('adminlte.register_url', 'register')) }}"
                        class="text-center"
-                    >Daftar Akun Baru</a>
+                    >Daftar Sebagai Member Baru</a>
                 @endif
             </div>
         </div>

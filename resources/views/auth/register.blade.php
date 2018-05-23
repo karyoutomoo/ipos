@@ -24,7 +24,9 @@
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('user_name'))
                         <span class="help-block">
-                            <strong>Nama Lengkap Diperlukan</strong>
+                            @foreach ($errors->get('user_name') as $error)
+                                <strong>{{$error}}</strong>
+                            @endforeach
                         </span>
                     @endif
                 </div>
@@ -34,7 +36,9 @@
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
-                            <strong>Email Diperlukan</strong>
+                            @foreach ($errors->get('email') as $error)
+                                <strong>{{$error}}</strong>
+                            @endforeach                            
                         </span>
                     @endif
                 </div>
@@ -44,7 +48,9 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">
-                            <strong>Password Diperlukan</strong>
+                            @foreach ($errors->get('password') as $error)
+                                <strong>{{$error}}</strong>
+                            @endforeach
                         </span>
                     @endif
                 </div>
@@ -54,7 +60,9 @@
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     @if ($errors->has('password_confirmation'))
                         <span class="help-block">
-                            <strong>Password Tidak Sama</strong>
+                            @foreach ($errors->get('password_confirmation') as $error)
+                                <strong>{{$error}}</strong>
+                            @endforeach
                         </span>
                     @endif
                 </div>

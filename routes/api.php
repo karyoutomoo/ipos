@@ -26,14 +26,14 @@ use App\Food;
 ** Route::delete($uri, $callback);
 **/
 
-Route::get('foods', 'FoodsController@index');
+// Route::get('foods', 'FoodsController@index');
 
-Route::get('foods/{food}', 'FoodsController@show');
+// Route::get('foods/{food}', 'FoodsController@show');
 
-Route::post('foods', 'FoodsController@store');
+// Route::post('foods', 'FoodsController@store');
 
-Route::put('foods/{food}', 'FoodsController@update');
+// Route::put('foods/{food}', 'FoodsController@update');
 
-Route::delete('foods/{food}', 'FoodsController@delete');
+// Route::delete('foods/{food}', 'FoodsController@delete');
 
 

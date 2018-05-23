@@ -123,9 +123,15 @@ return [
                     'icon'        => 'pencil',
                 ],
                 [
-                    'text'        => 'Status Pesanan',
+                    'text'        => 'Historis Pemesanan',
                     'url'         => 'pemesanan/status',
                     'icon'        => 'bell',
+                ],
+                [
+                    'text'        => 'Pesanan Kedai',
+                    'url'         => 'pemesanan/toko',
+                    'icon'        => 'balance-scale',
+                    'can'         => 'is_seller',
                 ],
             ],
         ],
@@ -139,9 +145,10 @@ return [
                     'icon'        => 'coffee',
                 ],
                 [
-                    'text'        => 'Daftarkan Menu',
+                    'text'        => 'Buat Menu Baru',
                     'url'         => 'makanan/buat',
                     'icon'        => 'pencil',
+                    'can'         => 'is_seller',
                 ],
                 [
                     'text'        => 'Ulasan',
@@ -151,15 +158,33 @@ return [
             ],
         ],
         [
-            'text'        => 'Toko',
-            'url'         => 'toko',
-            'icon'        => 'briefcase',
-        ],
-        [
-            'text'        => 'Pesanan Toko',
-            'url'         => 'pemesanan/toko',
-            'icon'        => 'balance-scale',
-            'can'         => 'is_seller',
+            'text'        => 'Kedai',
+            'icon'        => 'bank',
+            'submenu'     => [
+                [
+                    'text'        => 'Lihat Kedai',
+                    'url'         => 'toko/lihat',
+                    'icon'        => 'briefcase',
+                ],
+                [
+                    'text'        => 'Detail Kedai',
+                    'url'         => 'toko/detail',
+                    'icon'        => 'pie-chart',
+                    'can'         => 'is_seller',
+                ],
+                [
+                    'text'        => 'Buat Kedai Baru',
+                    'url'         => 'toko/buat',
+                    'icon'        => 'pencil',
+                    'can'         => 'is_seller',
+                ],
+                [
+                    'text'        => 'Daftar pada Kedai',
+                    'url'         => 'toko/daftar',
+                    'icon'        => 'child',
+                    'can'         => 'is_seller',
+                ],
+            ],
         ],
         [
             'text'        => 'Kasir',
@@ -178,11 +203,11 @@ return [
             'url'  => 'profile',
             'icon' => 'user',
         ],
-        [
-            'text' => 'Ubah Password',
-            'url'  => 'profile/password',
-            'icon' => 'lock',
-        ],
+        // [
+        //     'text' => 'Ubah Password',
+        //     'url'  => 'profile/password',
+        //     'icon' => 'lock',
+        // ],
         // [
         //     'text' => 'User',
         //     'url'  => 'admin/user',

@@ -12,10 +12,10 @@
 */
 Auth::routes();
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', 'OtherController@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('403', function(){return view('403'); });
+Route::get('403', 'OtherController@unauthorized');
 
 Route::prefix('profile')->group(function(){
   Route::get('/', 'ProfileController@index');
@@ -25,7 +25,7 @@ Route::prefix('profile')->group(function(){
 });
 
 Route::prefix('toko')->group(function(){
-  Route::get('/', function(){return redirect('toko/lihat');});
+  Route::get('/', 'StoresController@redirect_lihat');
   Route::get('/lihat', 'StoresController@index');
   Route::middleware('cekpenjual')->group(function(){
     Route::get('detail', 'StoresController@detail_index');

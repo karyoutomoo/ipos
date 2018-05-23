@@ -47,11 +47,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $errorMessage = [
+            'user_name.required' => 'Nama Diperlukan',
+            'user_name.max' => 'Panjang Maximum Nama adalah 255 karakter',
+            'email.required' => 'Email Diperlukan',
+            'email.email' => 'Email harus menggunakan format email yang benar',
+            'email.max' => 'Panjang Maximum Email adalah 255 karakter',
+            'email.unique' => 'Email anda sudah digunakan akun lain',
+            'password.required' => 'Password Diperlukan',
+            'password.min' => 'Panjang Minimum Password adalah 6 karakter',
+            'password.max' => 'Panjang Maximum Password adalah 255 karakter',
+            'password.confirmed' => 'Konfirmasi Password harus sama dengan Password',
+
+        ];
+
         return Validator::make($data, [
             'user_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+            'password' => 'required|string|min:6|max:255|confirmed',
+        ], $errorMessage);
     }
 
     /**

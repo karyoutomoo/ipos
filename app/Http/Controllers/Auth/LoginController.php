@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,19 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function validateLogin(Request $request){
+        $this->validate($request, [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6|max:255',
+        ], [
+            'email.required' => 'Email Dibutuhkan',
+            'email.email' => 'Email harus menggunakan format email yang benar',
+            'email.max' => 'Panjang Maximum Email adalah 255 karakter',
+            'password.required' => 'Password Dibutuhkan',
+            'password.min' => 'Panjang Minimum Password adalah 6 Karakter',
+            'password.max' => 'Panjang Maximum Password adalah 255 karakter',
+        ]);
     }
 }
